@@ -1,4 +1,3 @@
-# views/__init__.py
 """
 🚀 Cosmic Views Package - Your gateway to the view universe! 🌠
 
@@ -15,7 +14,6 @@ Usage:
 >>> from .views import HomeView, PostView, AboutView
 """
 
-# Cosmic imports for easy access 🌠
 from .home_views import HomeView
 from .post_views import PostView
 from .about_views import AboutView
@@ -30,11 +28,11 @@ __all__ = [
 ]
 
 __version__ = '1.0.0'  # 🌌 Current spacetime version
-__author__ = 'Soheil Fouladvandi <@gafelson>'  # 👽 Maintainer info
+__author__ = 'Soheil Fouladvandi <@gafelson>'
 
 def _cosmic_init() -> None:
     """🌈 Private function to align celestial view energies"""
-    print("🌀 Cosmic views initialized! Ready to handle requests at light speed! 🚀")
+    print("🌀 SOHEIL: Cosmic views initialized! Ready to handle requests at light speed! 🚀")
 
 # Automatically align cosmic energies when package is imported
 _cosmic_init()

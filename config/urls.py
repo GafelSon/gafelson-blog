@@ -9,7 +9,6 @@ from django.urls.resolvers import URLPattern, URLResolver
 from typing import List, Union
 
 from blog.views import NotFoundView, ServerErrorView
-from django_ckeditor_5.views import upload_file
 
 urlpatterns: List[Union[URLPattern, URLResolver]] = [
     # Admin panel with security through obscurity

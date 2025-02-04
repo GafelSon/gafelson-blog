@@ -33,9 +33,6 @@ class SEOContentMixin(models.Model):
         help_text= _("Set if this content exists elsewhere")
     )
 
-    class Meta:
-        abstract = True
-
     def get_meta_title(self):
         return self.meta_title or self.title
     

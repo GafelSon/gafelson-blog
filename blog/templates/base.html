@@ -1,0 +1,126 @@
+{% load compress %} {% load static %}
+<!DOCTYPE html>
+  <html lang="fa-IR" prefix="og: http://ogp.me/ns#">
+  <head>
+    <!-- Comprehensive Meta Tags -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"/>
+
+    <title>Gafelson Blog | {% block title %} {% endblock %}</title>
+    <meta name="description" content="وبلاگ تخصصی گاف: مقالات عمیق و کاربردی درباره برنامه‌نویسی، تکنولوژی نوین، راهکارهای توسعه نرم‌افزار و تجربیات شخصی در دنیای فناوری"/>
+
+    <meta name="keywords" content="برنامه‌نویسی, توسعه وب, تکنولوژی, مقالات تخصصی, هوش مصنوعی, برنامه‌نویسی وب, پایتون, جاوااسکریپت, django, react"/>
+    <meta name="author" content="Soheil Fouladvandi <@gafelson>" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
+
+    <meta name="geo.region" content="IR" />
+    <meta name="geo.placename" content="Iran" />
+    <meta name="language" content="Persian" />
+
+    <link rel="canonical" href="https://gafelson.ir" />
+    <link rel="alternate" hreflang="fa" href="https://gafelson.ir" />
+    <link rel="alternate" hreflang="en" href="https://gafelson.ir/en" />
+
+    <meta property="og:locale" content="fa_IR" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="گاف | وبلاگ تخصصی" />
+    <meta property="og:url" content="https://gafelson.ir" />
+    <meta property="og:title" content="گاف | وبلاگ تخصصی برنامه‌نویسی و تکنولوژی"/>
+    <meta property="og:description" content="وبلاگ تخصصی گاف: مقالات عمیق و کاربردی درباره برنامه‌نویسی، تکنولوژی نوین، راهکارهای توسعه نرم‌افزار"/>
+    <meta property="og:image" content="{% static 'img/og-image.jpg' %}" />
+    <meta property="og:image:secure_url" content="{% static 'img/og-image.jpg' %}"/>
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="گاف | وبلاگ تخصصی برنامه‌نویسی" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@gafelson" />
+    <meta name="twitter:creator" content="@gafelson" />
+    <meta name="twitter:url" content="https://gafelson.com" />
+    <meta name="twitter:title" content="گاف | وبلاگ تخصصی برنامه‌نویسی و تکنولوژی"/>
+    <meta name="twitter:description" content="وبلاگ تخصصی گاف: مقالات عمیق و کاربردی درباره برنامه‌نویسی، تکنولوژی نوین، راهکارهای توسعه نرم‌افزار"/>
+    <meta name="twitter:image" content="{% static 'img/twitter-card.jpg' %}" />
+    <meta name="twitter:image:alt" content="گاف | وبلاگ تخصصی برنامه‌نویسی" />
+
+    <meta name="theme-color" content="#000000" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+    <meta name="google-site-verification" content="YOUR_GOOGLE_SITE_VERIFICATION_CODE"/>
+    <meta name="bing-site-verification" content="YOUR_BING_SITE_VERIFICATION_CODE"/>
+
+    <link rel="stylesheet" href="{% static 'css/_fonts.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/_theme.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/_situation.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/core.css' %}" type="text/css" />
+
+    <link rel="icon" type="image/svg+xml" href="{% static 'images/fav.svg' %}" />
+    <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}"/>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "گاف | وبلاگ تخصصی برنامه‌نویسی",
+        "alternateName": "Gafelson Blog",
+        "url": "https://gafelson.ir",
+        "description": "وبلاگ تخصصی گاف: مقالات عمیق و کاربردی درباره برنامه‌نویسی، تکنولوژی نوین، راهکارهای توسعه نرم‌افزار",
+        "publisher": {
+          "@type": "Person",
+          "name": "Gafelson",
+          "jobTitle": "Software Developer",
+          "url": "https://gafelson.ir/about-me"
+        },
+        "sameAs": [
+          "https://github.com/gafelson",
+          "https://linkedin.com/in/gafelson"
+        ]
+      }
+    </script>
+
+    <!-- Extra Head -->
+    {% block extra_head %} {% endblock %}
+  </head>
+
+  <body class="gaf-main" dir="rtl" id="app">
+    <nav class="gaf-navbar-container" hx-swap-oob="true">
+      <div class="gaf-navbar-list">
+        <span class="gaf-navbar-item">جستوجو</span>
+        <span>ᛝ</span>
+        <a class="gaf-navbar-item {% if request.path == '/about-me' %} gaf-navbar-path {% endif %}" href="/about-me" hx-target="#page" hx-get="/about-me" hx-push-url="true">درباره من</a>
+        <span>ᛝ</span>
+        <a class="gaf-navbar-item" href="https://github.com/gafelson" target="_blank" rel="noopener noreferrer">گیت‌هاب</a>
+      </div>
+    {% if request.path != '/' %}
+    <span>⟡</span>
+    <button class="gaf-navbar-item backlink" hx-get="/" hx-target="#page" hx-push-url="true">
+      <div class="backlink-flex">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor">
+          <path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+            d="M4 14H6.67452C7.1637 14 7.40829 14 7.63846 14.0553C7.84254 14.1043 8.03763 14.1851 8.21657 14.2947C8.4184 14.4184 8.59136
+              14.5914 8.93726 14.9373L9.06274 15.0627C9.40865 15.4086 9.5816 15.5816 9.78343 15.7053C9.96237 15.8149 10.1575 15.8957 10.3615
+              15.9447C10.5917 16 10.8363 16 11.3255 16H12.6745C13.1637 16 13.4083 16 13.6385 15.9447C13.8425 15.8957 14.0376 15.8149 14.2166
+              15.7053C14.4184 15.5816 14.5914 15.4086 14.9373 15.0627L15.0627 14.9373C15.4086 14.5914 15.5816 14.4184 15.7834 14.2947C15.9624
+              14.1851 16.1575 14.1043 16.3615 14.0553C16.5917 14 16.8363 14 17.3255 14H20M7.2 4H16.8C17.9201 4 18.4802 4 18.908 4.21799C19.2843
+              4.40973 19.5903 4.71569 19.782 5.09202C20 5.51984 20 6.07989 20 7.2V16.8C20 17.9201 20 18.4802 19.782 18.908C19.5903 19.2843 19.2843
+              19.5903 18.908 19.782C18.4802 20 17.9201 20 16.8 20H7.2C6.0799 20 5.51984 20 5.09202 19.782C4.71569 19.5903 4.40973 19.2843 4.21799
+              18.908C4 18.4802 4 17.9201 4 16.8V7.2C4 6.0799 4 5.51984 4.21799 5.09202C4.40973 4.71569 4.71569 4.40973 5.09202 4.21799C5.51984 4 6.0799 4 7.2 4Z"/>
+        </svg>
+      </div>
+      <span>خانه</span>
+    </button>
+    {% endif %}
+    </nav>
+    <h1 class="gaf-logo">گاف.</h1>
+    <main class="h-full w-full overflow-hidden" id="page">{% block content %} {% endblock %}</main>
+    <footer class="gaf-footer">GAFELSON INC © - 2025</footer>
+
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+    <script type="module" src="{% static 'js/app.js' %}"></script>
+    {% block extra_scripts %} {% endblock %}
+  </body>
+</html>

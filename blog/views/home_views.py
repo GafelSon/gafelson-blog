@@ -19,7 +19,7 @@ class HomeView(View):
     _POST_YEARS_CACHE_TIMEOUT: int = 300  # ⏳ 1 hour cache lifespan
     
     def get(self, request: HttpRequest) -> HttpResponse:
-        """Handle GET requests with ninja-like efficiency 🥷"""
+        """ Handle GET requests with ninja-like efficiency """
         selected_year = self._get_selected_year(request)
         context: Dict[str, Any] = {
             **self._get_post_data(request, selected_year),
@@ -29,7 +29,7 @@ class HomeView(View):
         return render(request, "index.html", context)
     
     def _get_post_data(self, request: HttpRequest, selected_year: str) -> Dict[str, Any]:
-        """📚 Fetch and process post data with cache magic ✨"""
+        """ Fetch and process post data with cache magic """
         pinned, all_posts = self._get_filtered_posts(request.user, selected_year)
         
         # Add draft posts if user is authenticated
@@ -40,7 +40,7 @@ class HomeView(View):
             ).select_related('author', 'category')
             all_posts = list(draft_posts) + list(all_posts)
         
-        # 📝 Add summaries like adding sprinkles to cupcakes 🧁
+        # Add summaries like adding sprinkles to cupcakes
         for post_list in [pinned, all_posts]:
             add_post_summaries(post_list)
             

@@ -13,7 +13,7 @@ class ActivityVisualizer:
         """🌋 Create volcanic activity map from post data"""
         post_counts = defaultdict(int)
         for post in posts.filter(published__year=year or timezone.now().year):
-            post_counts[post.published.date()] += 1
+            post_counts[post.published] += 1
 
         max_count = max(post_counts.values()) if post_counts else 0
         return ActivityVisualizer._build_weeks(post_counts, year), max_count

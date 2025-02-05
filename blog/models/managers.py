@@ -1,12 +1,18 @@
 from django.db import models
 from django.utils import timezone
+from ..models.post import PostStatus
 
 
 class PostManager(models.Manager):
-    """Custom query machinery for post operations"""
+    def get_queryset(self):
+        queryset = super().get_queryset()
 
-    def published(self):
-        """Get currently active published posts"""
-        return self.filter(
-            status=PostStatus.PUBLISHED.value, published__lte=timezone.now()
+        now = timezone.now()
+        scheduled_posts = queryset.filter(
+            status=PostStatus.DRAFT.value,
+            published__lte=now
         )
+        if scheduled_posts.exists():
+            scheduled_posts.update(status=PostStatus.PUBLISHED.value)
+            
+        return queryset

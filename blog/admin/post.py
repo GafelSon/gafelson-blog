@@ -6,19 +6,16 @@ from ..models import Post, PostStatus
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    """Admin interface for Post model with strong typing 📜"""
+    """Admin interface for Post model with temporal publishing controls"""
 
     list_display = ('title', 'slug', 'published', 'is_published')
     list_filter = ("status", "published", "category")
     search_fields = ("title", "content", "category__name")
 
     prepopulated_fields = {"slug": ("title",)}
-    
-    # Make 'is_published' read-only in the admin
     readonly_fields = ("is_published",)
     actions = ["publish_selected", "unpublish_selected", "schedule_for_future"]
     
-    # Organize fields into sections
     fieldsets = (
         (None, {
             'fields': ('title', 'slug', 'subtitle', 'author', 'category', 'content')
@@ -40,11 +37,16 @@ class PostAdmin(admin.ModelAdmin):
     is_published.short_description = _("Published Status")
 
     def publish_selected(self, request, queryset):
-        """Admin action to publish selected posts"""
-        updated = queryset.update(
-            status=PostStatus.PUBLISHED.value,
-            published=timezone.now()
-        )
+        """Admin action to publish selected posts immediately"""
+        now = timezone.now()
+        updated = 0
+        
+        for post in queryset:
+            post.status = PostStatus.PUBLISHED.value
+            post.published = now
+            post.save()
+            updated += 1
+            
         self.message_user(request, _(f"{updated} posts were successfully published."))
     publish_selected.short_description = _("Publish selected posts")
 
@@ -55,27 +57,43 @@ class PostAdmin(admin.ModelAdmin):
     unpublish_selected.short_description = _("Unpublish selected posts")
 
     def schedule_for_future(self, request, queryset):
-        """Admin action to schedule posts for future publishing"""
+        """Admin action to ensure posts are drafts for future publishing"""
+        now = timezone.now()
+        updated = 0
+        
         for post in queryset:
-            if post.status == PostStatus.PUBLISHED.value:
+            if post.published > now:
                 post.status = PostStatus.DRAFT.value
                 post.save()
-        self.message_user(request, _("Selected posts were scheduled for future publishing."))
+                updated += 1
+                
+        self.message_user(request, _(f"{updated} posts were scheduled for future publishing."))
     schedule_for_future.short_description = _("Schedule for future publishing")
 
+    def get_queryset(self, request):
+        """Get queryset for admin view"""
+        return super().get_queryset(request)
+
     def save_model(self, request, obj: Post, form, change):
-        """Handle past-date confirmation and scheduled publishing"""
-        if obj.published < timezone.now() and not request.POST.get("allow_past_date"):
-            raise ValidationError(
-                _("You're setting a past date. Check the 'Allow Past Date' box to confirm.")
-            )
+        """Handle publication timing and status"""
+        now = timezone.now()
         
-        if obj.published > timezone.now() and obj.status == PostStatus.PUBLISHED.value:
-            obj.status = PostStatus.DRAFT.value
-            self.message_user(
-                request,
-                _("Post scheduled for future publishing. Status set to 'Draft'."),
-                level="warning"
-            )
+        if obj.status == PostStatus.PUBLISHED.value:
+            if obj.published > now:
+                # Future posts must be drafts
+                obj.status = PostStatus.DRAFT.value
+                self.message_user(
+                    request,
+                    _("Future posts must be drafts. Status has been updated."),
+                    level="warning"
+                )
+            else:
+                # Present/past posts get current timestamp
+                obj.published = now
+                self.message_user(
+                    request,
+                    _("Post published with current timestamp."),
+                    level="info"
+                )
         
         super().save_model(request, obj, form, change)

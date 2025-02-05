@@ -10,13 +10,14 @@ from .managers import PostManager
 from .category import Category
 from django.utils.translation import gettext_lazy as _
 from ckeditor.fields import RichTextField
+import datetime
 import json
 
 class Post(SEOContentMixin, models.Model):
     """ Primary content model with temporal publishing controls """
     objects = PostManager()
 
-    # Core Content
+    # Core Content fields remain the same
     title = models.CharField(
         max_length=250,
         verbose_name=_("Title"),
@@ -43,7 +44,6 @@ class Post(SEOContentMixin, models.Model):
         blank=True
     )
     
-    # URL Structure
     slug = models.SlugField(
         max_length=300,
         unique=True,
@@ -52,17 +52,19 @@ class Post(SEOContentMixin, models.Model):
         help_text=_("URL-friendly post identifier")
     )
     
-    # Publication Metadata
+    # Updated temporal fields
     published = models.DateTimeField(
         default=timezone.now,
-        verbose_name=_("Publication Date"),
+        verbose_name=_("Publication Date and Time"),
         db_index=True,
-        help_text=_("Set future date for scheduled publishing")
+        help_text=_("Set publication date and time")
     )
+    
     modified = models.DateTimeField(
         auto_now=True,
         verbose_name=_("Last Modified")
     )
+    
     status = models.CharField(
         max_length=10,
         choices=PostStatus.choices(),
@@ -70,6 +72,7 @@ class Post(SEOContentMixin, models.Model):
         verbose_name=_("Post Status"),
         db_index=True
     )
+    
     is_pinned = models.BooleanField(
         default=False,
         verbose_name=_("Pinned Post"),
@@ -77,7 +80,6 @@ class Post(SEOContentMixin, models.Model):
         db_index=True
     )
     
-    # Relationships
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
@@ -97,45 +99,38 @@ class Post(SEOContentMixin, models.Model):
             models.UniqueConstraint(
                 fields=["slug", "published"],
                 name="unique_post_slug_per_date"
-            ),
-            models.CheckConstraint(
-                check=models.Q(status=PostStatus.DRAFT.value) | 
-                       models.Q(published__lte=timezone.now()),
-                name="publish_date_future_only_for_drafts"
             )
         ]
 
     def __str__(self) -> str:
-        return f"{self.title} ({self.published:%Y-%m-%d})"
+        return f"{self.title} ({self.published.strftime('%Y-%m-%d %H:%M')})"
 
     def clean(self):
-        """Enforce temporal publishing rules"""
+        """Validate publication timing"""
         super().clean()
         now = timezone.now()
 
-        if self.published < now and not hasattr(self, '_override_past'):
-            raise ValidationError(
-                "Past-dated posts require passcode validation.",
-                code='past_date_no_passcode'
-            )
-        if self.published > now and self.status == PostStatus.PUBLISHED.value:
-            raise ValidationError(
-                "Future-dated posts must be drafts until publication time.",
-                code='future_published'
-            )
-    
+        if self.status == PostStatus.PUBLISHED.value:
+            if self.published > now:
+                raise ValidationError(
+                    "Cannot publish posts with future dates. Use draft status for scheduling.",
+                    code='future_published'
+                )
+
     def save(self, *args, **kwargs):
-        """Handle passcode validation for past-dated posts"""
-        passcode = kwargs.pop('passcode', None)
+        """Handle publication timing based on status"""
         now = timezone.now()
         
-        if self.published < now:
-            if passcode == 'PASSCODE':
-                self._override_past = True
-                self.status = PostStatus.PUBLISHED.value
-            else:
-                self.status = PostStatus.DRAFT.value
-                
+        # For new posts (no ID) or status changes
+        if not self.pk or 'status' in kwargs:
+            if self.status == PostStatus.PUBLISHED.value:
+                if self.published > now:
+                    # Future post - set as draft
+                    self.status = PostStatus.DRAFT.value
+                else:
+                    # Present/past post - set current time
+                    self.published = now
+        
         super().save(*args, **kwargs)
 
     @property
@@ -147,17 +142,16 @@ class Post(SEOContentMixin, models.Model):
         )
 
     def publish(self):
-        """Automatically publish when scheduled time arrives"""
-        if self.published <= timezone.now():
-            self.status = PostStatus.PUBLISHED.value
-            self.save()
+        """Publish post and set current timestamp"""
+        self.status = PostStatus.PUBLISHED.value
+        self.published = timezone.now()
+        self.save()
 
+    # Rest of the methods remain the same
     def get_absolute_url(self) -> str:
-        """Simplified canonical URL using slug only"""
         return reverse("blog:article", kwargs={'slug': self.slug})
 
     def get_seo_meta(self) -> dict:
-        """Generate SEO meta tags as structured data"""
         return {
             "title": self.get_meta_title(),
             "description": self.get_meta_description(),
@@ -174,7 +168,6 @@ class Post(SEOContentMixin, models.Model):
         }
 
     def get_schema_org_ld_json(self) -> str:
-        """Generate Schema.org JSON-LD structured data"""
         return json.dumps({
             "@context": "https://schema.org",
             "@type": "BlogPosting",
@@ -199,7 +192,6 @@ class Post(SEOContentMixin, models.Model):
         })
 
     def get_sitemap_entries(self) -> dict:
-        """Generate sitemap.xml compatible data"""
         return {
             "location": self.get_absolute_url(),
             "lastmod": self.modified,

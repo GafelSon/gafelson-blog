@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %} About Me {% endblock %}
+
+{% block meta_description %}درباره گاف - برنامه‌نویس، متفکر و نویسنده{% endblock %}
+
+{% block content %}
+<section id="about-me" class="flex justify-center items-center">
+  <div class="flex flex-col gap-2 justify-center max-w-3xl h-screen leading-7">
+    <div>
+      <h1 class="text-5xl font-extrabold text-[var(--text-color)]">گاف.</h1>
+      <h3 class="w-fit rounded-md bg-[var(--sub-alt-color)] px-4 text-[var(--main-color)]">گاف، ذهن منه!</h3>
+    </div>
+    <p>
+      ذهنی که گاهی باهام دعوا می‌کنه، گاهی ازم فرار می‌کنه، و گاهی هم باعث میشه حس کنم دارم توی یه دنیای پیچیده غرق می‌شم. من سهیلم، یه برنامه‌نویس که زندگی‌ش پر از سوال و ماجراجویی تو تکنولوژی، فلسفه
+      و خودشناسیه. اینجا قراره از هر چیزی که برام جذابه حرف بزنم؛ چیزایی که دنبال می‌کنم، یاد می‌گیرم، یا حتی چیزایی که ذهنم همین‌جوری بهم می‌گه. یه جورایی اینجا آزاده، نه قرار قضاوت کنیم، نه تعصب
+      داشته باشیم.
+    </p>
+    <p class="bg-[var(--error-color)]/5 my-1 border-r-2 border-[var(--error-color)] py-2 px-4 text-[var(--error-color)]">
+      ولی یه هشدار اگه فکر می‌کنی نمی‌تونی با آزادی فکر و بیان یا حرفای یه ذهن پیچیده کنار بیای، بهتره همین الان بری و دیگه هم برنگردی.
+    </p>
+    <p>گاف، جاییه برای گفت‌وگو با خودم، با شما، و با هر چیزی که میشه کشفش کرد.</p>
+
+    <div class="flex gap-4 items-center mt-2">
+      <a
+        href="https://github.com/gafelson"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover:bg-[var(--sub-color)]/10 hover:scale-102 flex items-center gap-2 rounded-md border border-[var(--sub-color)] px-3 py-1 text-sm text-[var(--sub-color)] transition-all duration-300 hover:border-[var(--main-color)] hover:text-[var(--main-color)]"
+      >
+        <svg class="min-w-5 min-h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path
+            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+          />
+        </svg>
+        <span>گیت‌هاب</span>
+      </a>
+      <a
+        href="https://twitter.com/gafelson"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover:bg-[var(--sub-color)]/10 hover:scale-102 flex items-center gap-2 rounded-md border border-[var(--sub-color)] px-3 py-1 text-sm text-[var(--sub-color)] transition-all duration-300 hover:border-[var(--main-color)] hover:text-[var(--main-color)]"
+      >
+        <svg class="min-w-5 min-h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4l11.733 16h4.267l-11.733-16h-4.267zM4 20l6.768-6.768M20 4l-6.768 6.768" />
+        </svg>
+        <span>توییتر</span>
+      </a>
+
+      <a
+        href="https://instagram.com/gafelson"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover:bg-[var(--sub-color)]/10 hover:scale-102 flex items-center gap-2 rounded-md border border-[var(--sub-color)] px-3 py-1 text-sm text-[var(--sub-color)] transition-all duration-300 hover:border-[var(--main-color)] hover:text-[var(--main-color)]"
+      >
+        <svg class="min-w-5 min-h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+        </svg>
+        <span>اینستاگرام</span>
+      </a>
+
+      <a
+        href="https://linkedin.com/in/gafelson"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover:bg-[var(--sub-color)]/10 hover:scale-102 flex items-center gap-2 rounded-md border border-[var(--sub-color)] px-3 py-1 text-sm text-[var(--sub-color)] transition-all duration-300 hover:border-[var(--main-color)] hover:text-[var(--main-color)]"
+      >
+        <svg class="min-w-5 min-h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+          <rect x="2" y="9" width="4" height="12" />
+          <circle cx="4" cy="4" r="2" />
+        </svg>
+        <span>لینکدین</span>
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}

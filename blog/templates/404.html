@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %} 404 - صفحه پیدا نشد {% endblock %}
+
+{% block meta_description %}صفحه مورد نظر شما پیدا نشد{% endblock %}
+
+{% block content %}
+<section id="error-404" class="flex justify-center items-center">
+  <div class="flex flex-col gap-2 justify-center max-w-3xl h-screen leading-7">
+    <div>
+      <h1 class="text-5xl font-extrabold text-[var(--text-color)]">404</h1>
+      <h3 class="w-fit rounded-md bg-[var(--sub-alt-color)] px-4 text-[var(--main-color)]">صفحه مورد نظر پیدا نشد!</h3>
+    </div>
+      <p>متاسفانه صفحه‌ای که به دنبال آن هستید وجود ندارد. ممکن است این صفحه حذف شده باشد، آدرس آن تغییر کرده باشد یا در وارد کردن آدرس اشتباه کرده باشید.</p>
+      <p class="bg-[var(--main-color)]/5 my-1 border-r-2 border-[var(--main-color)] py-2 px-4 text-[var(--main-color)]">
+      می‌توانید به
+      <a href="/" class="underline hover:text-[var(--caret-color)]">صفحه اصلی</a>
+      بازگردید یا از منوی بالا صفحه مورد نظر خود را پیدا کنید.
+      </p>
+  </div>
+</section>
+{% endblock %}

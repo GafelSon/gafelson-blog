@@ -1,0 +1,23 @@
+
+{% extends 'base.html' %}
+
+{% block title %} 500 - خطای سرور {% endblock %}
+
+{% block meta_description %}متاسفانه خطایی در سرور رخ داده است{% endblock %}
+
+{% block content %}
+<section id="error-500" class="flex justify-center items-center">
+  <div class="flex flex-col gap-2 justify-center max-w-3xl h-screen leading-7">
+    <div>
+      <h1 class="text-5xl font-extrabold text-[var(--text-color)]">500</h1>
+      <h3 class="w-fit rounded-md bg-[var(--sub-alt-color)] px-4 text-[var(--main-color)]">خطای داخلی سرور!</h3>
+    </div>
+    <p>متاسفانه خطایی در سرور رخ داده است. تیم فنی ما در حال بررسی و رفع مشکل است. لطفاً کمی بعد دوباره تلاش کنید.</p>
+    <p class="bg-[var(--main-color)]/5 my-1 border-r-2 border-[var(--main-color)] py-2 pr-4 text-[var(--main-color)]">
+      در این مدت می‌توانید به
+      <a href="/" class="underline hover:text-[var(--caret-color)]">صفحه اصلی</a>
+      بازگردید.
+    </p>
+  </div>
+</section>
+{% endblock %}

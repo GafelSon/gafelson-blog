@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     "ckeditor",
     "django.contrib.sites",
     "django.contrib.sitemaps",
+    "rest_framework",
     "robots",
     "imagekit",
     "lazy_srcset",
@@ -38,13 +39,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "config.urls"
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
 
 TEMPLATES = [
     {
@@ -89,7 +83,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Internationalization
-LANGUAGE_CODE = "fa-IR"
 TIME_ZONE = "Asia/Tehran"
 USE_I18N = True
 USE_TZ = True

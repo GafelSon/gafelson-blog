@@ -4,6 +4,7 @@ from django.urls import path
 from django.views.generic.base import TemplateView, RedirectView
 
 from . import views
+from . import api
 
 app_name: str = "blog"
 
@@ -38,6 +39,7 @@ urlpatterns: list[path] = [
         name="support",
     ),
     # path('category/<slug:slug>/', views.category_detail, name='category'),
+    path('api/update-history/', api.get_update_history, name='update_history'),
 ]
 
 

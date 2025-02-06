@@ -5,6 +5,7 @@ from django.conf import settings
 from django.conf.urls import handler404, handler500
 from django.contrib.sitemaps.views import sitemap
 from django.contrib.sitemaps import GenericSitemap
+from django.utils.functional import lazy
 from blog.models import Post, Category
 
 # Type hints for better IDE support
@@ -14,16 +15,19 @@ from typing import List, Union
 from blog.views import NotFoundView, ServerErrorView
 
 # Sitemap configuration
-sitemaps = {
-    'posts': GenericSitemap({
-        'queryset': Post.objects.filter(status='published'),
-        'date_field': 'modified',
-    }, priority=0.9),
-    'categories': GenericSitemap({
-        'queryset': Category.objects.all(),
-        'date_field': 'modified',
-    }, priority=0.8),
-}
+def get_sitemaps():
+    return {
+        'posts': GenericSitemap({
+            'queryset': Post.objects.filter(status='published'),
+            'date_field': 'modified',
+        }, priority=0.9),
+        'categories': GenericSitemap({
+            'queryset': Category.objects.all(),
+            'date_field': 'modified',
+        }, priority=0.8),
+    }
+
+sitemaps = lazy(get_sitemaps, dict)()
 
 urlpatterns: List[Union[URLPattern, URLResolver]] = [
     # Admin panel with security through obscurity

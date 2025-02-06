@@ -195,6 +195,6 @@ class Post(SEOContentMixin, models.Model):
         return {
             "location": self.get_absolute_url(),
             "lastmod": self.modified,
-            "changefreq": "monthly",
+            "changefreq": "daily",
             "priority": 0.8 if self.is_pinned else 0.5
         }

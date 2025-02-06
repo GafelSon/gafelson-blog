@@ -17,6 +17,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "compressor",
     "ckeditor",
+    "django.contrib.sites",
+    "django.contrib.sitemaps",
+    "robots",
     "imagekit",
     "lazy_srcset",
     "blog.apps.BlogConfig",
@@ -90,6 +93,11 @@ LANGUAGE_CODE = "fa-IR"
 TIME_ZONE = "Asia/Tehran"
 USE_I18N = True
 USE_TZ = True
+
+# robots.txt configuration
+SITE_ID = 1
+ROBOTS_USE_SITEMAP = True
+ROBOTS_USE_HOST = True
 
 # Static files
 STATIC_URL = "static/"

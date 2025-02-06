@@ -3,12 +3,27 @@ from django.urls import include, path
 from django.views.decorators.cache import cache_page
 from django.conf import settings
 from django.conf.urls import handler404, handler500
+from django.contrib.sitemaps.views import sitemap
+from django.contrib.sitemaps import GenericSitemap
+from blog.models import Post, Category
 
 # Type hints for better IDE support
 from django.urls.resolvers import URLPattern, URLResolver
 from typing import List, Union
 
 from blog.views import NotFoundView, ServerErrorView
+
+# Sitemap configuration
+sitemaps = {
+    'posts': GenericSitemap({
+        'queryset': Post.objects.filter(status='published'),
+        'date_field': 'modified',
+    }, priority=0.9),
+    'categories': GenericSitemap({
+        'queryset': Category.objects.all(),
+        'date_field': 'modified',
+    }, priority=0.8),
+}
 
 urlpatterns: List[Union[URLPattern, URLResolver]] = [
     # Admin panel with security through obscurity
@@ -18,6 +33,9 @@ urlpatterns: List[Union[URLPattern, URLResolver]] = [
     path("", cache_page(500)(include("blog.urls")), name="cached_home"),
     # Security endpoints
     path("security/", include("django.contrib.auth.urls")),
+    # Sitemap endpoints
+    path('robots.txt', include('robots.urls')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name="sitemap"),
 ]
 
 # Error handlers for production

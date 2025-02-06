@@ -54,7 +54,8 @@
     <link rel="stylesheet" href="{% static 'css/_fonts.css' %}" type="text/css"/>
     <link rel="stylesheet" href="{% static 'css/_theme.css' %}" type="text/css"/>
     <link rel="stylesheet" href="{% static 'css/_situation.css' %}" type="text/css"/>
-    <link rel="stylesheet" href="{% static 'css/core.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/_scroll.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/_main.css' %}" type="text/css" />
 
     <link rel="icon" type="image/svg+xml" href="{% static 'images/fav.svg' %}" />
     <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}"/>
@@ -114,7 +115,7 @@
     {% endif %}
     </nav>
     <h1 class="gaf-logo">گاف.</h1>
-    <main class="h-full w-full overflow-hidden" id="page">{% block content %} {% endblock %}</main>
+    <main class="overflow-hidden w-full h-full" id="page">{% block content %} {% endblock %}</main>
     <footer class="gaf-footer">GAFELSON INC © - 2025</footer>
 
 

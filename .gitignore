@@ -46,12 +46,12 @@ htmlcov/
 .pytest_cache/
 
 # MyPy
-.mypy_cache/
+pnpm-lock.yaml
 
 # Other
 .DS_Store
 Thumbs.db
 node_modules
 interface
-**/core.css
-/blog/templates/public/css/core.css
+**/_maincss
+/blog/templates/public/css/_main.css

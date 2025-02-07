@@ -13,7 +13,7 @@ class ActivityVisualizer:
         """🌋 Create volcanic activity map from post data"""
         post_counts = defaultdict(int)
         for post in posts.filter(published__year=year or timezone.now().year):
-            post_counts[post.published] += 1
+            post_counts[post.published.date()] += 1
 
         max_count = max(post_counts.values()) if post_counts else 0
         return ActivityVisualizer._build_weeks(post_counts, year), max_count
@@ -30,17 +30,14 @@ class ActivityVisualizer:
         max_count = max(post_counts.values()) if post_counts else 0
         
         # Add empty days to align with the start of week (Monday)
-        # Convert Sunday=6 to Sunday=0 for proper alignment
-        start_weekday = (start_date.isoweekday() % 7)  # Monday=1..Sunday=7 -> Monday=1..Sunday=0
-        for _ in range(start_weekday):
-            current_week.append({'date': None, 'count': 0, 'activity_level': 0})
+        start_weekday = start_date.weekday()  # Monday=0, Sunday=6
+        if start_weekday > 0:
+            for _ in range(start_weekday):
+                current_week.append({'date': None, 'count': 0, 'activity_level': 0})
         
         # Fill in the days
-        for day_offset in range(53 * 7):  # 53 weeks * 7 days
-            current_date = start_date + timedelta(days=day_offset)
-            if current_date.year > year:
-                break
-                
+        current_date = start_date
+        while current_date.year == year:
             count = post_counts.get(current_date, 0)
             # Calculate activity level (0-3)
             if count == 0:
@@ -64,6 +61,8 @@ class ActivityVisualizer:
             if len(current_week) == 7:
                 weeks.append(current_week)
                 current_week = []
+            
+            current_date += timedelta(days=1)
         
         # Add any remaining days and pad with empty days to complete the week
         if current_week:

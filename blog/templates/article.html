@@ -1,0 +1,171 @@
+
+{% extends 'base.html' %}
+
+{% block title %} {{ post.get_meta_title }} {% endblock %}
+
+{% block meta_description %} {{ post.subtitle }} {% endblock %}
+
+
+<script type="application/ld+json">
+  {{ post.get_schema_org_ld_json|safe }}
+</script>
+
+<meta property="og:title" content="{{ post.get_meta_title }}" />
+<meta property="og:description" content="{{ post.get_meta_description }}" />
+<meta property="og:image" content="{{ post.get_og_image_url }}" />
+<meta name="keywords" content="{{keywords}}"/>
+
+{% block content %}
+<style>
+  img {
+    max-width: 100%;
+    padding: 0.75rem;
+    object-fit: cover;
+    border-radius: 1.25rem;
+    margin: 1rem auto;
+    transition: transform 0.2s ease-in-out;
+  }
+  img:hover {
+    transform: scale(1.01);
+  }
+  .content {
+    color: var(--text-color);
+    transition: color 0.2s ease;
+  }
+  .content > h3 {
+    font-size: 1.3rem;
+    line-height: 2.2rem;
+    color: var(--main-color);
+    font-weight: 600;
+    text-align: right;
+    margin: 1.5rem 0 0.75rem;
+  }
+  .content > p {
+    font-size: 1.05rem;
+    line-height: 2rem;
+    margin: 0.75rem 0;
+    text-align: right;
+    letter-spacing: 0.01em;
+  }
+  .content > p > ul {
+    list-style-type: disc;
+    margin: 0.75rem 2rem;
+    text-align: right;
+  }
+  .content > li {
+    font-size: 1.05rem;
+    line-height: 2rem;
+    margin: 0.5rem 0;
+    text-align: right;
+  }
+  .content > a {
+    color: var(--main-color);
+    font-weight: 400;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+  }
+  .content > a:hover {
+    color: var(--text-color);
+  }
+</style>
+
+<section id="article" class="flex overflow-hidden h-full">
+  <div class="flex fixed right-0 left-0 bottom-8 gap-2 justify-center items-center mx-auto">
+    <div class="border-[var(--sub-color)]/10 bg-[var(--sub-alt-color)]/80 flex w-fit items-center justify-center gap-4 rounded-full border-[0.5px] backdrop-blur-[12px] p-4">
+      <div class="h-5 w-5 cursor-pointer hover:text-[var(--main-color)]">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+          />
+        </svg>
+      </div>
+      <div class="h-5 w-5 cursor-pointer hover:text-[var(--main-color)]">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M8 10.5H16M8 14.5H11M21.0039 12C21.0039 16.9706 16.9745 21 12.0039 21C9.9675 21 3.00463 21 3.00463 21C3.00463 21 4.56382 17.2561 3.93982 16.0008C3.34076 14.7956 3.00391 13.4372 3.00391 12C3.00391 7.02944 7.03334 3 12.0039 3C16.9745 3 21.0039 7.02944 21.0039 12Z"
+          />
+        </svg>
+      </div>
+      <div class="h-5 w-5 cursor-pointer hover:text-[var(--main-color)]">
+        <svg fill="currentColor" viewBox="-2 -2 24 24" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin" class="jam jam-qr-code">
+          <path
+            d="M13 18h3a2 2 0 0 0 2-2v-3a1 1 0 0 1 2 0v3a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4v-3a1 1 0 0 1 2 0v3a2 2 0 0 0 2 2h3a1 1 0 0 1 0 2h6a1 1 0 0 1 0-2zM2 7a1 1 0 1 1-2 0V4a4 4 0 0 1 4-4h3a1 1 0 1 1 0 2H4a2 2 0 0 0-2 2v3zm16 0V4a2 2 0 0 0-2-2h-3a1 1 0 0 1 0-2h3a4 4 0 0 1 4 4v3a1 1 0 0 1-2 0z"
+          />
+        </svg>
+      </div>
+      <button 
+          id="pallette"
+          class="flex justify-center items-center rounded-full hover:text-[var(--main-color)] focus:text-[var(--main-color)] transition-colors duration-200 cursor-pointer z-5"
+        >
+          <svg class="w-5 h-5 pointer-events-none" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path class="pointer-events-none" d="M15.5 8.5H15.51M10.5 7.5H10.51M7.5 11.5H7.51M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 13.6569 19.6569 15 18 15H17.4C17.0284 15 16.8426 15 16.6871 15.0246C15.8313 15.1602 15.1602 15.8313 15.0246 16.6871C15 16.8426 15 17.0284 15 17.4V18C15 19.6569 13.6569 21 12 21ZM16 8.5C16 8.77614 15.7761 9 15.5 9C15.2239 9 15 8.77614 15 8.5C15 8.22386 15.2239 8 15.5 8C15.7761 8 16 8.22386 16 8.5ZM11 7.5C11 7.77614 10.7761 8 10.5 8C10.2239 8 10 7.77614 10 7.5C10 7.22386 10.2239 7 10.5 7C10.7761 7 11 7.22386 11 7.5ZM8 11.5C8 11.7761 7.77614 12 7.5 12C7.22386 12 7 11.7761 7 11.5C7 11.2239 7.22386 11 7.5 11C7.77614 11 8 11.2239 8 11.5Z"/>
+          </svg>
+      </button>
+    </div>
+    <div id="article-back-to-top" class="border-[var(--sub-color)]/10 bg-[var(--sub-alt-color)]/80 flex w-fit items-center justify-center gap-4 rounded-full border-[0.5px] p-4 backdrop-blur-[12px]">
+      <div class="h-5 w-5 cursor-pointer hover:text-[var(--main-color)]">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div
+    id="main-scroll"
+    class="w-full flex justify-center overflow-y-auto px-6 pt-4 md:px-[20%] md:pt-0"
+  >
+    <div class="mt-1 md:mt-[5rem] max-w-3xl">
+      <div class="flex flex-col gap-4">
+        <h1 class="mt-1 w-full text-2xl font-semibold text-right md:mt-8"># {{post.title}}</h1>
+        <h2 class="bg-[var(--main-color)]/5 border-r-2 border-[var(--main-color)] px-4 py-2 text-sm">{{post.subtitle}}</h2>
+        <div class="flex items-center justify-between px-1 text-xs text-[var(--sub-color)]">
+          <div class="flex gap-1 items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>خواندن {{ reading_time }} دقیقه</span>
+          </div>
+          <div class="flex gap-1 items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <span>{{ post.published|timesince }} پیش</span>
+          </div>
+        </div>
+      </div>
+      <div class="content">{{post.content | safe}}</div>
+      <div class="flex flex-col">
+        <div class="mt-4 w-full text-center text-[var(--main-color)] bg-[var(--sub-alt-color)] py-1 rounded-md text-sm">{{post.author}}</div>
+        <div class="h-[0.5px] w-full bg-[var(--sub-color)]/30 mt-8"></div>
+        <div class="py-3">
+          {% if keywords %}
+          <ul class="text-sm text-[var(--text-color)] flex flex-wrap gap-2 mb-20"> {% for keyword in keywords %}
+            <li class="w-fit flex items-center justify-center gap-2 bg-[var(--sub-alt-color)] px-3 py-1 rounded-md transition-all duration-200 hover:scale-105 hover:bg-[var(--sub-alt-color)]/80 hover:text-[var(--main-color)]">
+              <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--main-color)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7.0498 7.0498H7.0598M10.5118 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V10.5118C3 11.2455 3 11.6124 3.08289 11.9577C3.15638 12.2638 3.27759 12.5564 3.44208 12.8249C3.6276 13.1276 3.88703 13.387 4.40589 13.9059L9.10589 18.6059C10.2939 19.7939 10.888 20.388 11.5729 20.6105C12.1755 20.8063 12.8245 20.8063 13.4271 20.6105C14.112 20.388 14.7061 19.7939 15.8941 18.6059L18.6059 15.8941C19.7939 14.7061 20.388 14.112 20.6105 13.4271C20.8063 12.8245 20.8063 12.1755 20.6105 11.5729C20.388 10.888 19.7939 10.2939 18.6059 9.10589L13.9059 4.40589C13.387 3.88703 13.1276 3.6276 12.8249 3.44208C12.5564 3.27759 12.2638 3.15638 11.9577 3.08289C11.6124 3 11.2455 3 10.5118 3ZM7.5498 7.0498C7.5498 7.32595 7.32595 7.5498 7.0498 7.5498C6.77366 7.5498 6.5498 7.32595 6.5498 7.0498C6.5498 6.77366 6.77366 6.5498 7.0498 6.5498C7.32595 6.5498 7.5498 6.77366 7.5498 7.0498Z"/>
+              </svg>
+              <span class="keyword">{{ keyword }}</span>
+              </li>
+              {% endfor %}
+          </ul>
+        {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>    
+  <div
+      class="fixed bottom-0 right-0 hover:text-[var(--text-color)] rounded-tl-lg px-4 py-1 text-sm font-light border-t-[0.5px] border-l-[0.5px] border-[var(--sub-color)]/50 flex items-center gap-2"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+      </svg>
+      {{ words }} کلمه
+</div>
+</section>
+{% endblock %}

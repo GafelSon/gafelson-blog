@@ -1,0 +1,244 @@
+{% extends 'base.html' %} {% block title %} Home {% endblock %} {% block content %}
+<!-- Section Home -->
+<section id="home" class="flex max-w-full h-full">
+  <div id="side-bar" class="flex sticky top-0 flex-col gap-8 justify-between pr-1 pb-1 pl-2 mt-4 md:mt-16 md:px-1 md:pb-1">
+    <div class="flex flex-col gap-8">
+      {% for year_data in years %}
+      <button hx-get="/?{% if selected_year != year_data.year|stringformat:'i' %}year={{ year_data.year }}{% endif %}" hx-target="#page" hx-push-url="true"
+        class="{% if selected_year == year_data.year|stringformat:'i' %} {% else %} text-[var(--text-color)]/30 hover:text-[var(--main-color)]/50 {% endif %} relative flex -rotate-90 cursor-pointer text-[var(--main-color)]">
+            {{ year_data.year }}
+        </button>
+      {% endfor %}
+    </div>
+    <div class="flex flex-col gap-2">
+      <button id="update-info" class="p-2 flex justify-center items-center rounded-full active:bg-[var(--sub-alt-color)] hover:bg-[var(--sub-color)]/10 hover:text-[var(--main-color)] focus:outline-none focus:ring-2 focus:ring-[var(--main-color)] focus:ring-offset-2 focus:ring-offset-[var(--bg-color)] active:bg-[var(--sub-color)]/20 transition-colors duration-200 cursor-pointer z-5">
+          <svg class="w-5 h-5 pointer-events-none" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path class="pointer-events-none" d="M5.5 8C6.88071 8 8 6.88071 8 5.5C8 4.11929 6.88071 3 5.5 3C4.11929 3 3 4.11929 3 5.5C3 6.88071 4.11929 8 5.5 8ZM5.5 8V16M5.5 16C4.11929 16 3 17.1193 3 18.5C3 19.8807 4.11929 21 5.5 21C6.88071 21 8 19.8807 8 18.5C8 17.1193 6.88071 16 5.5 16ZM18.5 8C19.8807 8 21 6.88071 21 5.5C21 4.11929 19.8807 3 18.5 3C17.1193 3 16 4.11929 16 5.5C16 6.88071 17.1193 8 18.5 8ZM18.5 8C18.5 8.92997 18.5 9.39496 18.3978 9.77646C18.1204 10.8117 17.3117 11.6204 16.2765 11.8978C15.895 12 15.43 12 14.5 12H8.5C6.84315 12 5.5 13.3431 5.5 15"/>
+          </svg>
+      </button>
+      <button 
+            id="pallette"
+            class="p-2 flex justify-center items-center rounded-full active:bg-[var(--sub-alt-color)] hover:bg-[var(--sub-color)]/10 hover:text-[var(--main-color)] focus:outline-none focus:ring-2 focus:ring-[var(--main-color)] focus:ring-offset-2 focus:ring-offset-[var(--bg-color)] active:bg-[var(--sub-color)]/20 transition-colors duration-200 cursor-pointer z-5">
+            <svg class="w-5 h-5 pointer-events-none" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path class="pointer-events-none" d="M15.5 8.5H15.51M10.5 7.5H10.51M7.5 11.5H7.51M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 13.6569 19.6569 15 18 15H17.4C17.0284 15 16.8426 15 16.6871 15.0246C15.8313 15.1602 15.1602 15.8313 15.0246 16.6871C15 16.8426 15 17.0284 15 17.4V18C15 19.6569 13.6569 21 12 21ZM16 8.5C16 8.77614 15.7761 9 15.5 9C15.2239 9 15 8.77614 15 8.5C15 8.22386 15.2239 8 15.5 8C15.7761 8 16 8.22386 16 8.5ZM11 7.5C11 7.77614 10.7761 8 10.5 8C10.2239 8 10 7.77614 10 7.5C10 7.22386 10.2239 7 10.5 7C10.7761 7 11 7.22386 11 7.5ZM8 11.5C8 11.7761 7.77614 12 7.5 12C7.22386 12 7 11.7761 7 11.5C7 11.2239 7.22386 11 7.5 11C7.77614 11 8 11.2239 8 11.5Z"/>
+            </svg>
+      </button>
+    </div>
+  </div>
+  <div class="overflow-y-auto overflow-x-hidden pr-8 w-full">
+    <div id="content-table" class="max-w-[830px] pl-4 md:pt-10">
+      <!-- Pined Content -->
+      <div class="min-w-full rounded-md pb-8 text-[var(--main-color)]">
+        <div class="flex gap-1 p-2">
+          <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13.6318 8.22382L13.2654 7.85744C11.7353 6.32736 10.9703 5.56232 10.1409 5.56299C9.86995 5.56321 9.60189 5.61847 9.35297 5.72542C8.59095 6.05283 8.19087 7.05807 7.39072 9.06855L7.33281 9.21406C7.10596 9.78403 6.99254 10.069 6.8104 10.2989C6.67221 10.4733 6.50589 10.6235 6.31829 10.7431C6.071 10.9009 5.77593 10.9846 5.18578 11.1521C4.27067 11.4118 3.81311 11.5417 3.61005 11.8186C3.45915 12.0244 3.39264 12.2802 3.42416 12.5334C3.46657 12.8742 3.80289 13.2105 4.47554 13.8832L7.60603 17.0137C8.27867 17.6863 8.61499 18.0226 8.95577 18.065C9.20903 18.0966 9.46475 18.03 9.67057 17.8791C9.94751 17.6761 10.0774 17.2185 10.3371 16.3034C10.5046 15.7133 10.5883 15.4182 10.7461 15.1709C10.8657 14.9833 11.0159 14.817 11.1903 14.6788C11.4202 14.4967 11.7052 14.3832 12.2751 14.1564L12.4206 14.0985C14.4311 13.2983 15.4364 12.8982 15.7638 12.1362C15.8707 11.8873 15.926 11.6192 15.9262 11.3483C15.9269 10.5189 15.1618 9.7539 13.6318 8.22382Z" stroke="currentColor" stroke-width="1.5" />
+            <path d="M3.34679 18.142L6.04053 15.4482" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M22 8H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M22 12.5H18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M22 17H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+          </svg>
+          <h3 class="text-sm">پست‌های سنجاق‌شده</h3>
+        </div>
+        <div class="grid grid-cols-1 gap-2 md:grid-cols-2">
+          {% if pinned %}
+            {% for pin in pinned %}
+            <div onclick="document.location='{{pin.get_absolute_url}}'" class="max-w-screen hover:bg-[var(--sub-alt-color)]/50 flex cursor-pointer flex-col gap-2 rounded-md border p-2 hover:border-[var(--caret-color)] md:flex-row">
+              <div class="text-sm text-[var(--main-color)]">
+                <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M13.6318 8.22382L13.2654 7.85744C11.7353 6.32736 10.9703 5.56232 10.1409 5.56299C9.86995 5.56321 9.60189 5.61847 9.35297 5.72542C8.59095 6.05283 8.19087 7.05807 7.39072 9.06855L7.33281 9.21406C7.10596 9.78403 6.99254 10.069 6.8104 10.2989C6.67221 10.4733 6.50589 10.6235 6.31829 10.7431C6.071 10.9009 5.77593 10.9846 5.18578 11.1521C4.27067 11.4118 3.81311 11.5417 3.61005 11.8186C3.45915 12.0244 3.39264 12.2802 3.42416 12.5334C3.46657 12.8742 3.80289 13.2105 4.47554 13.8832L7.60603 17.0137C8.27867 17.6863 8.61499 18.0226 8.95577 18.065C9.20903 18.0966 9.46475 18.03 9.67057 17.8791C9.94751 17.6761 10.0774 17.2185 10.3371 16.3034C10.5046 15.7133 10.5883 15.4182 10.7461 15.1709C10.8657 14.9833 11.0159 14.817 11.1903 14.6788C11.4202 14.4967 11.7052 14.3832 12.2751 14.1564L12.4206 14.0985C14.4311 13.2983 15.4364 12.8982 15.7638 12.1362C15.8707 11.8873 15.926 11.6192 15.9262 11.3483C15.9269 10.5189 15.1618 9.7539 13.6318 8.22382Z" fill="currentColor" />
+                  <path d="M3.34679 18.142L6.04053 15.4482" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+              </div>
+              <div class="flex flex-col gap-3 justify-between p-1 w-full">
+                <div class="flex flex-col gap-1">
+                  <div class="flex gap-2 items-center">{{pin.title}}</div>
+                  <p class="text-[var(--text-color)]/80 text-sm font-light">{{ pin.subtitle }}</p>
+                </div>
+                <div class="text-[var(--caret-color)]text-sm flex items-center justify-end gap-1 font-thin">
+                  <p>{{pin.published | date:"Y M d"}}</p>
+                  <svg fill="currentColor" width="15px" height="15px" viewBox="0 0 25 25" xmlns="http://www.w3.org/2000/svg"><path d="M19,4H17V3a1,1,0,0,0-2,0V4H9V3A1,1,0,0,0,7,3V4H5A3,3,0,0,0,2,7V19a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V7A3,3,0,0,0,19,4Zm1,15a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V12H20Zm0-9H4V7A1,1,0,0,1,5,6H7V7A1,1,0,0,0,9,7V6h6V7a1,1,0,0,0,2,0V6h2a1,1,0,0,1,1,1Z" /></svg>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+            {% else %}
+              <div class="w-full flex justify-center items-center flex-col col-span-2 border border-dashed border-[var(--main-color)]/40 text-[var(--main-color)]/40 p-4 rounded-md">
+                <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M2 12C2.31566 12.2762 2.47348 12.4143 2.62328 12.5533C4.73938 14.5169 6.19676 17.0865 6.79584 19.9105C6.83825 20.1104 6.87576 20.3167 6.95079 20.7294L7 21M2 12C2.31565 11.7238 2.47347 11.5857 2.62327 11.4467C4.73938 9.48319 6.19676 6.9135 6.79584 4.08957C6.83824 3.88967 6.87576 3.68334 6.95079 3.27068L7 3M2 12H22M7 3C10.2097 4.2839 13.7903 4.2839 17 3M7 3L17 21M17 3L17.0492 3.27064C17.1242 3.68335 17.1618 3.8897 17.2042 4.08962C17.8033 6.9135 19.2606 9.48314 21.3767 11.4467C21.5265 11.5857 21.6843 11.7238 22 12M17 3L7 21M22 12C21.6843 12.2762 21.5265 12.4143 21.3767 12.5533C19.2606 14.5169 17.8032 17.0865 17.2042 19.9105C17.1618 20.1104 17.1242 20.3167 17.0492 20.7294L17 21M17 21C13.7903 19.7161 10.2097 19.7161 7 21M7 12C8.07273 13.2893 8.90219 14.7628 9.44793 16.3487L9.5 16.5C11.1503 16.1699 12.8497 16.1699 14.5 16.5L14.5521 16.3487C15.0978 14.7628 15.9273 13.2893 17 12C15.9273 10.7107 15.0978 9.23723 14.5521 7.65132L14.5 7.49999C12.8497 7.83005 11.1503 7.83005 9.5 7.49999L9.44793 7.65132C8.90219 9.23723 8.07273 10.7107 7 12Z"/>
+                  </svg>
+                  رکوردی یافت نشد!
+              </div>
+          {% endif %}
+        </div>
+      </div>
+      <!-- Section Contributions Graph -->
+      <div class="pb-8 min-w-full">
+        <div class="flex justify-between items-center p-2">
+          <div class="flex gap-2 text-[var(--main-color)]">
+            <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M8 2V5" />
+              <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M16 2V5" />
+              <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M3.5 9.09H20.5" />
+              <path stroke="currentColor" stroke-width="1.5" d="M21 8.5V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V8.5C3 5.5 4.5 3.5 8 3.5H16C19.5 3.5 21 5.5 21 8.5Z" />
+              <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M11.995 13.7H12.005" />
+              <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M8.295 13.7H8.305" />
+              <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M8.295 16.7H8.305" />
+              <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M11.995 16.7H12.005" />
+              <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M15.695 13.7H15.705" />
+              <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M15.695 16.7H15.705" />
+            </svg>
+            <h3 class="text-sm">
+              {% if not years %}
+                هیچ پستی وجود ندارد
+              {% else %}
+                {% for year_data in years %} {% if selected_year == year_data.year|stringformat:'i' %} {{ year_data.count }} پست در سال {{ year_data.year }} {% endif %} {% endfor %}
+              {% endif %}
+            </h3>
+          </div>
+          <a href="/about-me" class="flex items-center justify-center gap-1 text-xs text-[var(--sub-alt-coloe)] underline hover:text-[var(--sub-coloe)]">
+            <svg class="h-[12px] w-[12px]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor">
+              <path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M21 12C21 16.9706 16.9706 21 12 21M21 12C21 7.02944 16.9706 3 12 3M21 12C21 13.6569 16.9706 15 12 15C7.02944 15 3 13.6569 3 12M21 12C21 10.3431 16.9706 9 12 9C7.02944 9 3 10.3431 3 12M12 21C7.02944 21 3 16.9706 3 12M12 21C10.3431 21 9 16.9706 9 12C9 7.02944 10.3431 3 12 3M12 21C13.6569 21 15 16.9706 15 12C15 7.02944 13.6569 3 12 3M3 12C3 7.02944 7.02944 3 12 3" />
+            </svg>
+            من کی هستم؟
+          </a>
+        </div>
+
+        <!-- Contributions Graph -->
+        <div class="graph w-full rounded-md border-[0.5px] border-[var(--main-color)] px-4 py-3">
+          <div class="overflow-hidden">
+            <div class="overflow-x-auto overflow-y-hidden max-w-full md:overflow-x-hidden md:px-2 md:max-w-none">
+              <div class="pointer-events-none flex min-w-[800px] justify-evenly pb-1 pr-6 text-xs text-gray-400">
+                <div class="w-[10px]">Jan</div>
+                <div class="w-[10px]">Feb</div>
+                <div class="w-[10px]">Mar</div>
+                <div class="w-[10px]">Apr</div>
+                <div class="w-[10px]">May</div>
+                <div class="w-[10px]">Jun</div>
+                <div class="w-[10px]">Jul</div>
+                <div class="w-[10px]">Aug</div>
+                <div class="w-[10px]">Sep</div>
+                <div class="w-[10px]">Oct</div>
+                <div class="w-[10px]">Nov</div>
+                <div class="w-[10px]">Dec</div>
+              </div>
+              <div class="flex px-0 pt-1">
+                <div class="ml-3 flex flex-col items-end justify-evenly py-[10px] text-xs text-gray-400">
+                  <div class="mb-[12px] h-[10px]">Mon</div>
+                  <div class="mb-[12px] h-[10px]">Wed</div>
+                  <div class="h-[10px]">Fri</div>
+                </div>
+                <div class="grid-cols-53 grid w-fit gap-[2px]">
+                  {% for week in weeks %}
+                  <div class="grid-rows-7 grid gap-[2px]">
+                    {% for day in week %}
+                    <div class="group relative min-h-[12px] min-w-[12px] rounded-[2px] -outline-offset-[10x] outline-[var(--main-color)]
+                      {% if not day.date %}
+                          bg-transparent
+                      {% elif day.activity_level == 0 %}
+                          bg-[var(--sub-alt-color)]
+                      {% elif day.activity_level == 1 %}
+                          bg-[var(--main-color)]/50
+                      {% elif day.activity_level == 2 %}
+                          bg-[var(--main-color)]/75
+                      {% elif day.activity_level == 3 %}
+                          bg-[var(--main-color)]
+                      {% endif %}">
+                      <!-- Tooltip -->
+                      <div class="bg-[var(--sub-alt-color)]/80 border-[var(--main-color)]/5 z-100 pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 transform whitespace-nowrap rounded-md border-[0.5px] px-2 py-1 text-xs text-[var(--sub-color)] opacity-0 backdrop-blur-lg transition-opacity duration-200 group-hover:opacity-100">{% if day.date %} {{ day.count }} پست در تاریخ {{ day.date }} {% else %} تاریخ در دسترس نیست {% endif %}</div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                  {% endfor %}
+                </div>
+            </div>
+            </div>
+            <div class="flex justify-between items-center px-8 pt-2 w-full text-xs font-thin">
+              <div class="flex gap-2 items-center">
+                <span>بیشتر</span>
+                <ul class="flex gap-1 w-fit">
+                  <li class="group relative min-h-[12px] min-w-[12px] rounded-[2px] bg-[var(--main-color)] -outline-offset-[10x] outline-[var(--main-color)]"></li>
+                  <li class="bg-[var(--main-color)]/75 group relative min-h-[12px] min-w-[12px] rounded-[2px] -outline-offset-[10x] outline-[var(--main-color)]"></li>
+                  <li class="bg-[var(--main-color)]/50 group relative min-h-[12px] min-w-[12px] rounded-[2px] -outline-offset-[10x] outline-[var(--main-color)]"></li>
+                  <li class="group relative min-h-[12px] min-w-[12px] rounded-[2px] bg-[var(--sub-alt-color)] -outline-offset-[10x] outline-[var(--main-color)]"></li>
+                </ul>
+                <span>کمتر</span>
+              </div>
+              <a href="https://t.me/gafelblog" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--main-color)] cursor-pointer hidden md:block">میخوای سریع تر از پستها مطلع شی؟</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% if posts %}
+        {% for post in posts %}
+        <div class="post-container active:bg-[var(--sub-alt-color)]/20 hover:bg-[var(--sub-alt-color)]/20 hover:border-[var(--main-color)]/5 flex cursor-pointer flex-col gap-2 rounded-md border-[0.5px] border-transparent p-2 md:flex-row" onclick="document.location='{{post.get_absolute_url}}'">
+          <div class="min-w-[50px] p-1 text-sm text-[var(--sub-color)]">{{post.published | date:"m-d"}}</div>
+          <div class="flex flex-col w-full">
+            <div class="flex gap-2 items-center">
+              <p class="post-title text-[var(--main-color)] group-hover:underline">{{post.title}}</p>
+              <span class="{% if post.is_published %} text-[var(--main-color)] border-[var(--main-color)]/40 {% else %} text-blue-500 border-blue-500 {% endif %} rounded-md border-[0.5px] px-2 py-[3px] text-xs">{% if post.is_published %} عمومی {% else %} خصوصی {% endif %}</span>
+              <span class="rounded-md border-[0.5px] px-2 py-[3px] text-xs text-[var(--colorful-error-color)] text-[var(--colorful-error-color)]">
+                {% if not post.category %}
+                  بدون موضوع
+                {% else %}
+                  {{ post.category }}
+                {% endif %}
+              </span>
+            </div>
+            <p class="text-[var(--text-color)]/80 font-light">{{ post.subtitle }}</p>
+          </div>
+        </div>
+        {% endfor %}
+        {% else %}
+
+        <div class="w-full h-50 flex justify-center items-center flex-col col-span-2 border border-dashed border-[var(--main-color)]/40 text-[var(--main-color)]/40 p-4 rounded-md">
+          <svg class="w-15 h-15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M2 12C2.31566 12.2762 2.47348 12.4143 2.62328 12.5533C4.73938 14.5169 6.19676 17.0865 6.79584 19.9105C6.83825 20.1104 6.87576 20.3167 6.95079 20.7294L7 21M2 12C2.31565 11.7238 2.47347 11.5857 2.62327 11.4467C4.73938 9.48319 6.19676 6.9135 6.79584 4.08957C6.83824 3.88967 6.87576 3.68334 6.95079 3.27068L7 3M2 12H22M7 3C10.2097 4.2839 13.7903 4.2839 17 3M7 3L17 21M17 3L17.0492 3.27064C17.1242 3.68335 17.1618 3.8897 17.2042 4.08962C17.8033 6.9135 19.2606 9.48314 21.3767 11.4467C21.5265 11.5857 21.6843 11.7238 22 12M17 3L7 21M22 12C21.6843 12.2762 21.5265 12.4143 21.3767 12.5533C19.2606 14.5169 17.8032 17.0865 17.2042 19.9105C17.1618 20.1104 17.1242 20.3167 17.0492 20.7294L17 21M17 21C13.7903 19.7161 10.2097 19.7161 7 21M7 12C8.07273 13.2893 8.90219 14.7628 9.44793 16.3487L9.5 16.5C11.1503 16.1699 12.8497 16.1699 14.5 16.5L14.5521 16.3487C15.0978 14.7628 15.9273 13.2893 17 12C15.9273 10.7107 15.0978 9.23723 14.5521 7.65132L14.5 7.49999C12.8497 7.83005 11.1503 7.83005 9.5 7.49999L9.44793 7.65132C8.90219 9.23723 8.07273 10.7107 7 12Z"/>
+            </svg>
+
+      {% endif %}
+      
+      <div class="flex flex-wrap gap-8 items-center w-full text-sm ext">
+        <h5>گافلسون©</h5>
+        <div class="links flex flex-wrap pl-5 gap-3 text-[var(--sub-color)]/90">
+        <a class="flex gap-1 justify-center hover:underline" href="/connect-me">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 8L17.4392 9.97822C15.454 11.0811 14.4614 11.6326 13.4102 11.8488C12.4798 12.0401 11.5202 12.0401 10.5898 11.8488C9.53864 11.6326 8.54603 11.0811 6.5608 9.97822L3 8M6.2 19H17.8C18.9201 19 19.4802 19 19.908 18.782C20.2843 18.5903 20.5903 18.2843 20.782 17.908C21 17.4802 21 16.9201 21 15.8V8.2C21 7.0799 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V15.8C3 16.9201 3 17.4802 3.21799 17.908C3.40973 18.2843 3.71569 18.5903 4.09202 18.782C4.51984 19 5.07989 19 6.2 19Z"/>
+            </svg>
+          ارتباط</a>
+          <a class="flex gap-1 justify-center hover:underline" href="/support">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 7.14614C13.5 7.00383 12.6851 6.99859 12 7.00383C11.7709 7.00558 11.9094 6.9944 11.6 7.00383C10.7926 7.03273 10.0016 7.41781 10 8.50882C9.99825 9.67108 11 10.015 12 10.015C13 10.015 14 10.2803 14 11.5211C14 12.4536 13.1925 12.8621 12.1861 12.9974C11.3861 12.9974 11 13.0272 10 12.8838M12 13V14M12 6V7M21 17V17.8C21 18.9201 21 19.4802 20.782 19.908C20.5903 20.2843 20.2843 20.5903 19.908 20.782C19.4802 21 18.9201 21 17.8 21H6.2C5.0799 21 4.51984 21 4.09202 20.782C3.71569 20.5903 3.40973 20.2843 3.21799 19.908C3 19.4802 3 18.9201 3 17.8V17M19 10C19 13.866 15.866 17 12 17C8.13401 17 5 13.866 5 10C5 6.13401 8.13401 3 12 3C15.866 3 19 6.13401 19 10Z"/>
+              </svg>
+          حمایت</a>
+          <a class="flex gap-1 justify-center hover:underline" href="https://github.com/GafelSon/gafelson-blog" target="_blank" rel="noopener noreferrer">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 8L3 11.6923L7 16M17 8L21 11.6923L17 16M14 4L10 20"/>
+              </svg>
+          گیت‌هاب</a>
+          <a class="flex gap-1 justify-center hover:underline" href="https://t.me/gafelblog" target="_blank" rel="noopener noreferrer">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 14.5V16.5M7 10.0288C7.47142 10 8.05259 10 8.8 10H15.2C15.9474 10 16.5286 10 17 10.0288M7 10.0288C6.41168 10.0647 5.99429 10.1455 5.63803 10.327C5.07354 10.6146 4.6146 11.0735 4.32698 11.638C4 12.2798 4 13.1198 4 14.8V16.2C4 17.8802 4 18.7202 4.32698 19.362C4.6146 19.9265 5.07354 20.3854 5.63803 20.673C6.27976 21 7.11984 21 8.8 21H15.2C16.8802 21 17.7202 21 18.362 20.673C18.9265 20.3854 19.3854 19.9265 19.673 19.362C20 18.7202 20 17.8802 20 16.2V14.8C20 13.1198 20 12.2798 19.673 11.638C19.3854 11.0735 18.9265 10.6146 18.362 10.327C18.0057 10.1455 17.5883 10.0647 17 10.0288M7 10.0288V8C7 5.23858 9.23858 3 12 3C14.7614 3 17 5.23858 17 8V10.0288"/>
+              </svg>
+          تلگرام</a>
+          <a class="flex gap-1 justify-center hover:underline" href="/terms">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 16V20M6 4V8M7 18H3M8 6H4M13 4L14.7528 8.44437C14.9407 8.92083 15.0347 9.15906 15.1786 9.35994C15.3061 9.538 15.462 9.69391 15.6401 9.82143C15.8409 9.9653 16.0792 10.0593 16.5556 10.2472L21 12L16.5556 13.7528C16.0792 13.9407 15.8409 14.0347 15.6401 14.1786C15.462 14.3061 15.3061 14.462 15.1786 14.6401C15.0347 14.8409 14.9407 15.0792 14.7528 15.5556L13 20L11.2472 15.5556C11.0593 15.0792 10.9653 14.8409 10.8214 14.6401C10.6939 14.462 10.538 14.3061 10.3599 14.1786C10.1591 14.0347 9.92083 13.9407 9.44437 13.7528L5 12L9.44437 10.2472C9.92083 10.0593 10.1591 9.9653 10.3599 9.82143C10.538 9.69391 10.6939 9.538 10.8214 9.35994C10.9653 9.15906 11.0593 8.92083 11.2472 8.44437L13 4Z"/>
+              </svg>
+          اخلاقیات</a>
+          <a class="flex gap-1 justify-center hover:underline" href="/security">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11.302 21.6149C11.5234 21.744 11.6341 21.8086 11.7903 21.8421C11.9116 21.8681 12.0884 21.8681 12.2097 21.8421C12.3659 21.8086 12.4766 21.744 12.698 21.6149C14.646 20.4784 20 16.9084 20 12V6.6C20 6.04207 20 5.7631 19.8926 5.55048C19.7974 5.36198 19.6487 5.21152 19.4613 5.11409C19.25 5.00419 18.9663 5.00084 18.3988 4.99413C15.4272 4.95899 13.7136 4.71361 12 3C10.2864 4.71361 8.57279 4.95899 5.6012 4.99413C5.03373 5.00084 4.74999 5.00419 4.53865 5.11409C4.35129 5.21152 4.20259 5.36198 4.10739 5.55048C4 5.7631 4 6.04207 4 6.6V12C4 16.9084 9.35396 20.4784 11.302 21.6149Z"/>
+              </svg>
+          امنیت</a>
+          <a class="flex gap-1 justify-center hover:underline" href="/privacy">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 14.5V16.5M7 10.0288C7.47142 10 8.05259 10 8.8 10H15.2C15.9474 10 16.5286 10 17 10.0288M7 10.0288C6.41168 10.0647 5.99429 10.1455 5.63803 10.327C5.07354 10.6146 4.6146 11.0735 4.32698 11.638C4 12.2798 4 13.1198 4 14.8V16.2C4 17.8802 4 18.7202 4.32698 19.362C4.6146 19.9265 5.07354 20.3854 5.63803 20.673C6.27976 21 7.11984 21 8.8 21H15.2C16.8802 21 17.7202 21 18.362 20.673C18.9265 20.3854 19.3854 19.9265 19.673 19.362C20 18.7202 20 17.8802 20 16.2V14.8C20 13.1198 20 12.2798 19.673 11.638C19.3854 11.0735 18.9265 10.6146 18.362 10.327C18.0057 10.1455 17.5883 10.0647 17 10.0288M7 10.0288V8C7 5.23858 9.23858 3 12 3C14.7614 3 17 5.23858 17 8V10.0288"/>
+              </svg>
+          حریم‌خصوصی</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %} حمایت {% endblock %}
+
+{% block meta_description %} حمایت از وبلاگ {% endblock %}
+
+{% block content %}
+<section class="flex justify-center items-center">
+  <div class="flex flex-col gap-2 justify-center max-w-5xl h-screen leading-7">
+    <div>
+      <h1 class="text-5xl font-extrabold text-[var(--text-color)]">حمایت</h1>
+      <h3 class="w-fit rounded-md bg-[var(--sub-alt-color)] px-4 text-[var(--main-color)]">از گاف حمایت کنید</h3>
+    </div>
+    <div class="my-4">
+      <p>
+        اوه، پس واقعاً می‌خواین از گاف حمایت کنید؟ خب، اول بگم که بدون پول شما، این پروژه مثل یه ماشین بی‌بنزینه – هیچ جا نمی‌ره. ولی با حمایتتون، حداقل می‌تونم یه فنجون قهوه بخرم و ادامه بدم. 🤷‍♂️
+      </p>
+    </div>
+    <div class="grid grid-cols-4 gap-4">
+      <!-- Enable Ads -->
+      <a
+        href="#"
+        class="hover:bg-[var(--sub-color)]/10 aspect-square flex flex-col items-center justify-center gap-2 rounded-md border border-[var(--sub-color)] p-4 text-center text-[var(--sub-color)] transition-all duration-300 hover:scale-102 hover:border-[var(--main-color)] hover:text-[var(--main-color)]"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+        </svg>
+        <span class="font-bold">فعال کردن تبلیغات</span>
+        <p class="text-sm opacity-75">با غیرفعال کردن ادبلاکر</p>
+      </a>
+      <!-- Donate -->
+      <a
+        href="https://buymeacoffee.com/gafelson"
+        class="hover:bg-[var(--sub-color)]/10 aspect-square flex flex-col items-center justify-center gap-2 rounded-md border border-[var(--sub-color)] p-4 text-center text-[var(--sub-color)] transition-all duration-300 hover:scale-102 hover:border-[var(--main-color)] hover:text-[var(--main-color)]"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.171-.879-1.172-2.303 0-3.182C10.536 7.719 11.768 7.5 12 7.5c.725 0 1.45.22 2.003.659" />
+        </svg>
+        <span class="font-bold">حمایت مالی</span>
+        <p class="text-sm opacity-75">از طریق درگاه پرداخت</p>
+      </a>
+      <!-- Join Patreon -->
+      <a
+        href="https://patreon.com/gafelson?utm_medium=clipboard_copy&utm_source=copyLink&utm_campaign=creatorshare_creator&utm_content=join_link"
+        class="hover:bg-[var(--sub-color)]/10 aspect-square flex flex-col items-center justify-center gap-2 rounded-md border border-[var(--sub-color)] p-4 text-center text-[var(--sub-color)] transition-all duration-300 hover:scale-102 hover:border-[var(--main-color)] hover:text-[var(--main-color)]"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+        </svg>
+        <span class="font-bold">عضویت در Patreon</span>
+        <p class="text-sm opacity-75">حمایت ماهانه از گاف</p>
+      </a>
+      <a
+        href="https://reymit.ir/gafelson"
+        class="hover:bg-[var(--sub-color)]/10 aspect-square flex flex-col items-center justify-center gap-2 rounded-md border border-[var(--sub-color)] p-4 text-center text-[var(--sub-color)] transition-all duration-300 hover:scale-102 hover:border-[var(--main-color)] hover:text-[var(--main-color)]"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+        </svg>
+        <span class="font-bold">حمایت داخلی</span>
+        <p class="text-sm opacity-75">حمایت ریالی برای افراد داخل ایران</p>
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}

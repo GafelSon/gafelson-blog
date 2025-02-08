@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block title %} امنیت {% endblock %}
+
+{% block meta_description %} سیاست‌های امنیتی وبلاگ {% endblock %}
+
+{% block content %}
+<section class="flex overflow-hidden max-w-full h-full">
+    <div class="w-full overflow-y-auto px-6 pt-12 py-12 md:px-[20%]">
+        <header class="border-b border-[var(--sub-color)]/20 pb-6">
+            <h1 class="text-4xl font-black text-[var(--main-color)]">امنیت وبلاگ</h1>
+            <p class="text-sm mt-4 text-[var(--sub-color)]"><strong>تاریخ انتشار:</strong>۲۲ بهمن ۱۴۰۳</p>
+            <p class="text-sm text-[var(--sub-color)]"><strong>آخرین به‌روزرسانی:</strong>۲۲ بهمن ۱۴۰۳</p>
+        </header>
+        <section class="my-8 bg-[var(--sub-alt-color)]/10 p-6 rounded-lg border border-[var(--sub-color)]/10">
+            <p class="leading-relaxed">
+                امنیت؟ بیخیال! هیچ چیزی امن نیست، حتی خود اینترنت. اگه کسی گفت "من امنم"، بهش شک کنین، چون قطعاً یه چیزی پنهونه. اینجا همه چیز ممکنه داغون بشه، پس مراقب خودتون باشید.
+            </p>
+        </section>
+        <nav class="my-8">
+            <h2 class="text-2xl font-bold text-[var(--main-color)]">فهرست مطالب (اگه واقعاً حوصله داری)</h2>
+            <ol class="mt-4 space-y-2">
+                <li class="hover:text-[var(--main-color)] transition-colors">
+                    <a href="#section1" class="flex gap-2 items-center">
+                        <span class="text-[var(--sub-color)]">🔒</span>
+                        <span>SSL؟ آره، ولی نه انقدر که فکر می‌کنی.</span>
+                    </a>
+                </li>
+                <li class="hover:text-[var(--main-color)] transition-colors">
+                    <a href="#section2" class="flex gap-2 items-center">
+                        <span class="text-[var(--sub-color)]">🛡️</span>
+                        <span>محافظت از داده‌ها؟ فقط تا حدی.</span>
+                    </a>
+                </li>
+                <li class="hover:text-[var(--main-color)] transition-colors">
+                    <a href="#section3" class="flex gap-2 items-center">
+                        <span class="text-[var(--sub-color)]">🔄</span>
+                        <span>به‌روزرسانی‌ها؟ اگه یادم بیفته.</span>
+                    </a>
+                </li>
+                <li class="hover:text-[var(--main-color)] transition-colors">
+                    <a href="#section10" class="flex gap-2 items-center">
+                        <span class="text-[var(--sub-color)]">🚨</span>
+                        <span>گزارش مشکلات؟ خب، اگه واقعاً مجبوری...</span>
+                    </a>
+                </li>
+            </ol>
+        </nav>
+        <article class="space-y-12">
+            <section id="section1">
+                <h2 class="text-2xl font-bold text-[var(--main-color)] mb-4">SSL؟ آره، ولی فقط برای نمایش!</h2>
+                <div class="space-y-4">
+                    <p>بله، SSL دارم. چرا؟ چون بدونش مرورگرها منو می‌زنن. حالا بیا ببینیم چی دارم:</p>
+                    <ul class="mr-6 space-y-2 list-disc">
+                        <li>گواهینامه SSL؟ آره، ولی فقط برای اینکه URL شما از HTTPS شروع بشه.</li>
+                        <li>HTTPS برای تمام صفحات؟ آره، ولی اگه هکرها خیلی بخوان، می‌تونن رد بشن.</li>
+                        <li>رمزنگاری انتها به انتها؟ خب، اگه واقعاً مهم باشه، شاید استفاده کنم.</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="section2">
+                <h2 class="text-2xl font-bold text-[var(--main-color)] mb-4">محافظت از داده‌ها؟ فقط تا حدی!</h2>
+                <div class="space-y-4">
+                    <p>بله، داده‌هاتون رو نگه می‌دارم. ولی نگران نباشید، فقط تا جایی که لازمه:</p>
+                    <ul class="mr-6 space-y-2 list-disc">
+                        <li>سرورهای امن؟ آره، ولی اگه سرور داغون شد، خودتون مسئولید.</li>
+                        <li>محدودیت دسترسی؟ فقط برای کسایی که اسم‌شون رو بلد نیستم.</li>
+                        <li>پشتیبان‌گیری منظم؟ آره، ولی اگه فراموش کنم، خودتون بک‌آپ بگیرید.</li>
+                    </ul>
+                    
+                    <div class="bg-[var(--main-color)]/5 p-4 rounded-lg mt-4">
+                        <h3 class="mb-2 font-bold">اقدامات اضافی امنیتی؟ فقط اگه وقت داشته باشم!</h3>
+                        <ul class="mr-6 space-y-2 list-disc">
+                            <li>محافظت در برابر DDOS؟ آره، ولی اگه حمله خیلی بزرگ باشه، شاید سایت داغون بشه.</li>
+                            <li>فیلترینگ محتوای مخرب؟ خب، اگه بفهمم چیه، شاید فیلتر کنم.</li>
+                            <li>مانیتورینگ ۲۴/۷؟ آره، ولی فقط وقتی که بیدارم.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section id="section3">
+                <h2 class="text-2xl font-bold text-[var(--main-color)] mb-4">به‌روزرسانی‌ها؟ اگه یادم بیفته!</h2>
+                <p>برای حفظ امنیت وبلاگ، این موارد رو انجام می‌دم. البته اگه یادم بیفته:</p>
+                <ul class="mt-4 mr-6 space-y-2 list-disc">
+                    <li>به‌روزرسانی نرم‌افزارها؟ آره، ولی فقط وقتی که دیدم همه دارن می‌گن "به‌روزرسانی کنید!"</li>
+                    <li>رفع آسیب‌پذیری‌ها؟ خب، اگه خیلی بد باشه، شاید انجام بدم.</li>
+                    <li>اعمال پچ‌های امنیتی؟ آره، ولی اگه وقت داشته باشم.</li>
+                </ul>
+            </section>
+            <section id="section10" class="border-t border-[var(--sub-color)]/20 pt-8">
+                <h2 class="text-2xl font-bold text-[var(--main-color)] mb-4">گزارش مشکلات؟ خب، اگه واقعاً مجبوری...</h2>
+                <p>اگه مشکل امنیتی پیدا کردی، بیا بگو. ولی قبلش فکر کن که واقعاً جواب من رو می‌خوای:</p>
+                <div class="flex gap-2 items-center mt-4">
+                    <span class="font-bold">ایمیل امنیتی:</span>
+                    <a href="mailto:soheil.fouladvandi@yahoo.com" class="bg-[var(--sub-alt-color)] px-3 py-1.5 rounded-md hover:bg-[var(--main-color)]/10 transition-colors">
+                        soheil.fouladvandi@yahoo.com
+                    </a>
+                </div>
+                <p class="mt-6 text-sm text-[var(--sub-color)]">
+                    از اینکه وقتتون رو برای خوندن این متن تلف کردید، ممنونم. حالا برو یه کار بهتر انجام بده.
+                </p>
+            </section>
+        </article>
+    </div>
+</section>
+{% endblock %}

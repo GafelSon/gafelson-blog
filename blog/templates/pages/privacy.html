@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %} حریم‌خصوصی {% endblock %}
+
+{% block meta_description %} سیاست حفظ حریم‌خصوصی - به زبون خودمونی {% endblock %}
+
+{% block content %}
+<section class="flex overflow-hidden max-w-full h-full">
+    <div class="w-full overflow-y-auto px-6 pt-12 py-12 md:px-[20%]">
+        <header class="border-b border-[var(--sub-color)]/20 pb-6">
+            <h1 class="text-4xl font-black text-[var(--main-color)]">سیاست حریم خصوصی</h1>
+            <p class="text-sm mt-4 text-[var(--sub-color)]"><strong>تاریخ انتشار:</strong>۲۲ بهمن ۱۴۰۳</p>
+            <p class="text-sm text-[var(--sub-color)]"><strong>آخرین به‌روزرسانی:</strong>۲۲ بهمن ۱۴۰۳</p>
+        </header>
+        <section class="my-8 bg-[var(--sub-alt-color)]/10 p-6 rounded-lg border border-[var(--sub-color)]/10">
+            <p class="leading-relaxed">       
+من به عنوان نویسنده‌ی گاف، اصلاً به حریم خصوصی شما اهمیتی نمی‌دم. تو این صفحه می‌خوام بنویسم چطور اطلاعات شما رو به باد می‌دم، چون هیچ چیز خصوصی نیست. اگه مشکلی داری، خودت حلش کن.
+            </p>
+        </section>
+        <nav class="my-8">
+            <h2 class="text-2xl font-bold text-[var(--main-color)]">فهرست مطالب (اگه واقعاً حوصله داری)</h2>
+            <ol class="mt-4 space-y-2">
+                <li class="hover:text-[var(--main-color)] transition-colors">
+                    <a href="#section1" class="flex gap-2 items-center">
+                        <span class="text-[var(--sub-color)]">📊</span>
+                        <span>داده‌ها؟ آره، همه‌شون رو می‌گیرم.</span>
+                    </a>
+                </li>
+                <li class="hover:text-[var(--main-color)] transition-colors">
+                    <a href="#section2" class="flex gap-2 items-center">
+                        <span class="text-[var(--sub-color)]">🍪</span>
+                        <span>کوکی‌ها؟ جنسشون خوبه، ولی برای شما نیست.</span>
+                    </a>
+                </li>
+                <li class="hover:text-[var(--main-color)] transition-colors">
+                    <a href="#section3" class="flex gap-2 items-center">
+                        <span class="text-[var(--sub-color)]">🔒</span>
+                        <span>امنیت؟ آره، تا جایی که من بهش فکر کنم.</span>
+                    </a>
+                </li>
+                <li class="hover:text-[var(--main-color)] transition-colors">
+                    <a href="#section10" class="flex gap-2 items-center">
+                        <span class="text-[var(--sub-color)]">💌</span>
+                        <span>ارتباط با من؟ اوه، خوشحالم که پرسیدی!</span>
+                    </a>
+                </li>
+            </ol>
+        </nav>
+        <article class="space-y-12">
+            <section id="section1">
+                <h2 class="text-2xl font-bold text-[var(--main-color)] mb-4">داده‌ها؟ همه‌شون مال منه.</h2>
+                <div class="space-y-4">
+                    <p>بله، من همه‌چیز رو جمع‌آوری می‌کنم. چرا؟ چون می‌تونم. حالا بیا ببینیم چی دارم:</p>
+                    <ul class="mr-6 space-y-2 list-disc">
+                        <li>آدرس IP؟ برای اینکه بدونم کجای دنیا داری این متن رو می‌خونی و بعد برم بگم به کسی که به من پول می‌ده.</li>
+                        <li>اطلاعات مرورگر؟ برای اینکه بدونم چقدر قدیمی‌ترین نسخه کروم رو داری استفاده می‌کنی.</li>
+                        <li>تنظیمات شخصی‌سازی؟ برای اینکه بتونم تبلیغات بیشتری برات بفرستم.</li>
+                    </ul>
+                    
+                    <div class="bg-[var(--main-color)]/5 p-4 rounded-lg mt-4">
+                        <h3 class="mb-2 font-bold">داده‌های محافظت شده؟ آره، مثل سگ در خونه.</h3>
+                        <ul class="mr-6 space-y-2 list-disc">
+                            <li>اطلاعات شخصی شما؟ اگه بخوام، می‌فروشم.</li>
+                            <li>تاریخچه مرور؟ خب، اگه خیلی جالب باشه، شاید بخونم.</li>
+                            <li>رمزهای عبور؟ نه، اینا رو نمی‌گیرم. چرا؟ چون بلد نیستم چیکار کنم باهاشون.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section id="section2">
+                <h2 class="text-2xl font-bold text-[var(--main-color)] mb-4">کوکی‌ها؟ آره، ولی نه برای شما.</h2>
+                <p>کوکی‌ها رو دوست دارم. چرا؟ چون می‌تونم باهاشون کارهای زیادی انجام بدم:</p>
+                <ul class="mt-4 mr-6 space-y-2 list-disc">
+                    <li>ذخیره تنظیمات؟ برای اینکه دفعه بعد که اومدی، بتونم سریع‌تر تبلیغات برات نشون بدم.</li>
+                    <li>بهینه‌سازی وبلاگ؟ آره، برای اینکه سرعت بیشتری داشته باشه تا زودتر برم برات تبلیغ بفرستم.</li>
+                    <li>تجربه کاربری؟ خب، اگه ناراحت نباشی، منم خوشحال‌ترم.</li>
+                </ul>
+            </section>
+            <section id="section3">
+                <h2 class="text-2xl font-bold text-[var(--main-color)] mb-4">امنیت؟ آره، تا جایی که لازمه.</h2>
+                <p>امنیت داده‌ها مهمه، ولی نه انقدر که فکر می‌کنی:</p>
+                <ul class="mt-4 mr-6 space-y-2 list-disc">
+                    <li>SSL؟ آره، دارم استفاده می‌کنم. ولی اگه هکرها خیلی بخوان، می‌تونن رد بشن.</li>
+                    <li>سیستم‌های امنیتی؟ آپدیت می‌کنم، ولی فقط وقتی که یادم بیفته.</li>
+                    <li>روش‌های امنیتی؟ آره، از بهترین‌ها استفاده می‌کنم. البته بهترین‌ها برای من، نه برای شما.</li>
+                </ul>
+            </section>
+            <section id="section10" class="border-t border-[var(--sub-color)]/20 pt-8">
+                <h2 class="text-2xl font-bold text-[var(--main-color)] mb-4">ارتباط با من؟ خب، اگه واقعاً مجبوری...</h2>
+                <p>اگه سوالی داری، بیا بپرس. ولی قبلش فکر کن که واقعاً جواب من رو می‌خوای:</p>
+                <div class="flex gap-2 items-center mt-4">
+                    <span class="font-bold">ایمیل:</span>
+                    <a href="mailto:soheil.fouladvandi@yahoo.com" class="bg-[var(--sub-alt-color)] px-3 py-1.5 rounded-md hover:bg-[var(--main-color)]/10 transition-colors">
+                        soheil.fouladvandi@yahoo.com
+                    </a>
+                </div>
+                <p class="mt-6 text-sm text-[var(--sub-color)]">
+                    از اینکه وقتتون رو برای خوندن این متن تلف کردید، ممنونم. حالا برو یه کار بهتر انجام بده.
+                </p>
+            </section>
+        </article>
+    </div>
+</section>
+{% endblock %}

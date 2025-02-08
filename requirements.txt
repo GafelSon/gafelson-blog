@@ -14,13 +14,17 @@ django-appconf==1.0.6
 django-ckeditor==6.7.2
 django-compressor==4.5.1
 django-debug-toolbar==5.0.1
+django-filter==24.3
 django-imagekit==5.0.0
 django-js-asset==3.0.1
 django-lazy-srcset==1.0.5
 django-redis==5.4.0
+django-robots==6.1
+djangorestframework==3.15.2
 docopt==0.6.2
 idna==3.10
 kombu==5.4.2
+Markdown==3.7
 pilkit==3.0
 pillow==11.1.0
 pipreqs==0.4.13

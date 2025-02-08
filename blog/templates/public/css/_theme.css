@@ -1,0 +1,110 @@
+.gaf-main {
+    height: 100%;
+    max-height: 100vh;
+    width: 100%;
+    padding: 1.5rem;
+    padding-top: 5rem;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.gaf-navbar-container {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 1.5rem;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.gaf-navbar-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.375rem;
+    border: 0.5px solid;
+    padding: 0.25rem 1rem;
+    color: var(--sub-color);
+    background-color: var(--sub-alt-color);
+    border-color: var(--sub-alt-color);
+}
+
+.gaf-navbar-item {
+    cursor: pointer;
+}
+
+.gaf-navbar-item:hover,
+.gaf-navbar-item:focus-within {
+    color: var(--main-color);
+}
+
+.valid {
+    color: var(--main-color) !important;
+}
+
+.backlink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    border-radius: 0.375rem;
+    border: 0.5px solid;
+    padding: 0.25rem 1rem;
+    color: var(--sub-color);
+}
+
+.backlink-flex {
+    height: 1rem;
+    width: 1rem;
+    cursor: pointer;
+}
+  
+.backlink-flex:hover {
+    color: var(--main-color);
+}
+
+.gaf-logo {
+    position: absolute;
+    top: 1.5rem;
+    display: none;
+    cursor: progress;
+    padding: 0.25rem;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 800;
+}
+
+.gaf-footer {
+    background-color: var(--bg-color);
+    color: var(--sub-color);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    cursor: help;
+    border-radius: 0.375rem;
+    padding: 0.25rem 1rem;
+    font-size: 0.875rem;      
+}
+
+@media (min-width: 768px) {
+    .gaf-main {
+        padding-top: 1.5rem;
+    }
+    .gaf-navbar-container {
+        left: 2rem;
+        right: unset;
+        top: 1.5rem;
+    }
+    .gaf-logo {
+        display: flex;
+    }
+    .gaf-footer {
+        bottom: 1rem;
+        left: 2rem;
+    }
+}

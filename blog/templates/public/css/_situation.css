@@ -1,0 +1,186 @@
+/*
+ * CSS Reset and Base Styles
+ * ------------------------
+ * This file provides foundational styling rules that create a consistent
+ * base across different browsers and devices. It includes:
+ *
+ * 1. Box Model Reset
+ *    - Uses border-box for predictable sizing
+ *    - Removes default margins
+ *
+ * 2. Typography Foundation
+ *    - Sets base font family and antialiasing
+ *    - Configures line height for readability
+ *    - Implements modern text wrapping (pretty, balance)
+ *
+ * 3. Media Element Handling
+ *    - Ensures responsive images and media
+ *    - Prevents overflow issues
+ *
+ * 4. Form Element Normalization
+ *    - Standardizes input appearances
+ *    - Maintains font inheritance
+ *
+ * 5. Layout Utilities
+ *    - Sets up isolation context
+ *    - Manages overflow behavior
+ */
+
+/* Box Model Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    font-family: "Arad", 'Times New Roman', Times, serif !important;
+}
+
+html {
+    width: 100vw !important;
+    height: 100svh !important;
+}
+
+/* Typography Foundation */
+body {
+    visibility: hidden;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Arad", 'Times New Roman', Times, serif !important;
+}
+
+/* Media Element Handling */
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+/* Form Element Normalization */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* Text Wrapping */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+
+p {
+    text-wrap: pretty;
+}
+
+/* Layout Utilities */
+#root,
+#__next {
+    isolation: isolate;
+}
+
+.ext {
+    margin-top: 2rem;
+}
+
+.content {
+    margin-top: 2rem;
+}
+
+.links > a {
+    cursor: pointer;
+}
+
+.theme-option:hover {
+    background: var(--text-color) !important;
+    color: var(--bg-color) !important;
+}
+
+.post-container:hover .post-title {
+    text-decoration: underline;
+}
+
+.post-title:hover ~ .post-container {
+    background-color: rgb(var(--sub-alt-color) / 0.2);
+    border-color: rgb(var(--main-color) / 0.05);
+}
+
+.message-container {
+    position: absolute;
+    transition: opacity 0.5s ease;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeIn 0.5s ease-out forwards;
+    left: 2rem;
+    top: 50%;
+    min-width: 300px;
+    background-color: var(--bg-color);
+    border: 1px solid var(--sub-color);
+    border-radius: 0.5rem;
+    border-top-left-radius: 0.75rem !important;
+    border-top-right-radius: 0.75rem !important;
+}
+
+.message-box {
+    width: 100%;
+    display: flex;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    justify-content: space-between;
+    background: var(--sub-color);
+    color: var(--bg-color);
+}
+
+.message-container.animation {
+    animation: fadeOut 0.5s ease-in forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.grid-cols-53 {
+    display: grid;
+    grid-template-columns: repeat(53, 1fr);
+    gap: 2px;
+}
+
+.grid-rows-7 {
+    display: grid;
+    grid-template-rows: repeat(7, 1fr);
+    gap: 2px;
+    height: 100%;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+}

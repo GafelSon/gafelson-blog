@@ -1,0 +1,68 @@
+/* Arad Font Family Declarations
+ * A comprehensive set of font weights for the Arad font family
+ * Using font-display: swap for better loading performance
+ */
+
+@font-face {
+    font-family: 'Arad';
+    src: url('../fonts/ar_thin.woff2') format('woff2');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Arad';
+    src: url('../fonts/ar_extra_light.woff2') format('woff2');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Arad';
+    src: url('../fonts/ar_light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Arad';
+    src: url('../fonts/ar_regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Arad';
+    src: url('../fonts/ar_medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Arad';
+    src: url('../fonts/ar_semibold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Arad';
+    src: url('../fonts/ar_bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Arad';
+    src: url('../fonts/ar_extra_bold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}

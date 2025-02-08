@@ -54,5 +54,5 @@ pnpm-lock.yaml
 Thumbs.db
 node_modules
 interface
-**/_maincss
-/blog/templates/public/css/_main.css
+# **/_main.css
+# /blog/templates/public/css/_main.css

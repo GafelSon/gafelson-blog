@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # Security - Will be overridden in production
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
-ADMIN_URL = os.getenv("ADMIN_URL", "admin")
+ADMIN_URL = os.getenv("ADMIN_URL", "gf-admin")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -29,6 +29,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",

@@ -23,8 +23,9 @@ DEBUG_TOOLBAR_PANELS = [
 ]
 
 # Static files
-STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_ROOT = BASE_DIR / "media"
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 COMPRESS_ROOT = STATIC_ROOT
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 COMPRESS_OFFLINE = True

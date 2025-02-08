@@ -3,7 +3,7 @@ import os
 
 # Security
 DEBUG = False
-ALLOWED_HOSTS = [os.getenv("DOMAIN_NAME")]
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1,[::1]").split(",")
 
 # Caching (Use Redis/Memcached)
 CACHES = {
@@ -47,7 +47,8 @@ SECURE_HSTS_PRELOAD = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 # Static files
-STATIC_ROOT = os.getenv("STATIC_ROOT", BASE_DIR / "media")
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 COMPRESS_ROOT = STATIC_ROOT
 
 # Security & Performance Headers

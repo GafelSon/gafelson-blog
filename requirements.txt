@@ -22,9 +22,11 @@ django-redis==5.4.0
 django-robots==6.1
 djangorestframework==3.15.2
 docopt==0.6.2
+gunicorn==23.0.0
 idna==3.10
 kombu==5.4.2
 Markdown==3.7
+packaging==24.2
 pilkit==3.0
 pillow==11.1.0
 pipreqs==0.4.13

@@ -22,12 +22,17 @@ CACHES = {
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "blogdb",
-        "USER": "bloguser",
-        "PASSWORD": "strongpassword",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
+        "NAME": os.getenv("POSTGRES_DB"),
+        "USER": os.getenv("POSTGRES_USER"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
+        "HOST": os.getenv("POSTGRES_HOST"),
+        "PORT": os.getenv("POSTGRES_PORT"),
         "CONN_MAX_AGE": 300,
+        'POOL_OPTIONS': {
+            'POOL_SIZE': 10,
+            'MAX_OVERFLOW': 10,
+            'RECYCLE': 24 * 60 * 60
+        }
     }
 }
 

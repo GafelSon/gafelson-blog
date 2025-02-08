@@ -115,5 +115,5 @@ SILENCED_SYSTEM_CHECKS = [
 
 # SEO Defaults
 SITE_NAME = "Gaf Blog"
-DEFAULT_OG_IMAGE_URL = "/static/images/default-og.jpg"
-LOGO_URL = "/static/images/logo.jpg"
+DEFAULT_OG_IMAGE_URL = "/blog/templates/public/images/default-og.jpg"
+LOGO_URL = "/blog/templates/public/images/logo.jpg"

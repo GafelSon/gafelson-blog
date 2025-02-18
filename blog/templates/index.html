@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block title %} Home {% endblock %} {% block content %}
 <!-- Section Home -->
 <section id="home" class="flex max-w-full h-full">
-  <div id="side-bar" class="flex sticky top-0 flex-col gap-8 justify-between pr-1 pb-1 pl-2 mt-4 md:mt-16 md:px-1 md:pb-1">
+  <div id="side-bar" class="md:flex hidden sticky top-0 flex-col gap-8 justify-between pr-1 pb-1 pl-2 mt-4 md:mt-16 md:px-1 md:pb-1">
     <div class="flex flex-col gap-8">
       {% for year_data in years %}
       <button hx-get="/?{% if selected_year != year_data.year|stringformat:'i' %}year={{ year_data.year }}{% endif %}" hx-target="#page" hx-push-url="true"
@@ -25,8 +25,12 @@
       </button>
     </div>
   </div>
-  <div class="overflow-y-auto overflow-x-hidden pr-8 w-full">
+  <div class="overflow-y-auto overflow-x-hidden md:pr-8 px-2 w-full">
     <div id="content-table" class="max-w-[830px] pl-4 md:pt-10">
+      <div class="w-20 h-20">
+        وبلاگ گاف.
+      </div>
+
       <!-- Pined Content -->
       <div class="min-w-full rounded-md pb-8 text-[var(--main-color)]">
         <div class="flex gap-1 p-2">

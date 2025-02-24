@@ -5,6 +5,10 @@ from .serializers import UpdateVersionSerializer, PostCreateSerializer
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 import logging
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # Add this line at the top after imports
 
 logger = logging.getLogger(__name__)
 
@@ -31,19 +35,18 @@ def get_update_history(request):
 @api_view(['POST'])
 def create_random_posts(request):
     try:
-        # چک کردن توکن
-        token = request.headers.get('X-API-Token', 'default_token_123')
-        if token != 'default_token_123':
+        token = request.headers.get('X-API-Token', os.getenv('API_TOKEN'))
+        if token != os.getenv('API_TOKEN'):
             return Response({"error": "Invalid token"}, status=403)
             
         serializer = PostCreateSerializer(data=request.data)
         if serializer.is_valid():
-            duplicate_count = serializer.validated_data.pop('duplicate_count', 1)  # حذف duplicate_count
-            target_date = serializer.validated_data.pop('target_date')  # حذف target_date
+            duplicate_count = serializer.validated_data.pop('duplicate_count', 1)
+            target_date = serializer.validated_data.pop('target_date')
 
             created_posts = []
             for _ in range(duplicate_count):
-                post_data = dict(serializer.validated_data)  # کپی داده‌های معتبر
+                post_data = dict(serializer.validated_data)
                 post_data['published'] = timezone.make_aware(
                     timezone.datetime.combine(target_date, timezone.datetime.min.time())
                 )

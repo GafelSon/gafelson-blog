@@ -27,11 +27,19 @@
   </div>
   <div class="overflow-y-auto overflow-x-hidden md:pr-8 px-2 w-full">
     <div id="content-table" class="max-w-[830px] pl-4 md:pt-10">
-      <div>
-        <h1>وبلاگ گاف.</h1>
-        <span>
-          اینجا یک وبلاگ شخصی درباره من و اون چیزی که یاد می‌گیرم، می‌نویسم و می‌سازم. جایی برای اشتراک‌گذاری افکار، تجربه‌ها، پروژه‌ها و هر چیزی که برام جالب و ارزشمنده.
-        </span>
+      <div class="flex justify-center items-center gap-2 pattern w-full h-[200px] p-4 relative rounded-md">
+        <h1 class="absolute top-2 right-2 rounded-md font-bold text-[var(--main-color)] bg-[var(--bg-color)] p-2 text-2xl">وبلاگ گاف.</h1>
+
+        <p class="w-2/3 text-center text-[var(--main-color)] bg-[var(--sub-alt-color)]/80 backdrop-blur-sm py-[3px] text-sm flex items-center justify-center gap-1 font-light px-2 rounded-md">
+          سهیل هستم، برنامه‌نویسی که بین تکنولوژی، فلسفه و خودشناسی ماجراجویی می‌کنه و اینجا جاییه برای فکرهایی که بی‌مرز جاری می‌شن.
+        </p>
+        <a href="/about-me" class="absolute bottom-2 left-2 bg-[var(--sub-alt-color)] text-sm flex items-center justify-center gap-1 font-light px-2 rounded-md hover:bg-[var(--sub-alt-color)]/80 transition-colors duration-200">
+          <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+          </svg>
+          اینجا کجاست؟
+        </a>
       </div>
 
       <!-- Pined Content -->
@@ -49,21 +57,21 @@
         <div class="grid grid-cols-1 gap-2 md:grid-cols-2">
           {% if pinned %}
             {% for pin in pinned %}
-            <div onclick="document.location='{{pin.get_absolute_url}}'" class="max-w-screen hover:bg-[var(--sub-alt-color)]/50 flex cursor-pointer flex-col gap-2 rounded-md border p-2 hover:border-[var(--caret-color)] md:flex-row">
+            <div onclick="document.location='{{pin.get_absolute_url}}'" class="max-w-screen hover:bg-[var(--sub-alt-color)]/50 flex cursor-pointer flex-col gap-2 relative rounded-md border p-2 hover:border-[var(--caret-color)] md:flex-row">
               <div class="text-sm text-[var(--main-color)]">
                 <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M13.6318 8.22382L13.2654 7.85744C11.7353 6.32736 10.9703 5.56232 10.1409 5.56299C9.86995 5.56321 9.60189 5.61847 9.35297 5.72542C8.59095 6.05283 8.19087 7.05807 7.39072 9.06855L7.33281 9.21406C7.10596 9.78403 6.99254 10.069 6.8104 10.2989C6.67221 10.4733 6.50589 10.6235 6.31829 10.7431C6.071 10.9009 5.77593 10.9846 5.18578 11.1521C4.27067 11.4118 3.81311 11.5417 3.61005 11.8186C3.45915 12.0244 3.39264 12.2802 3.42416 12.5334C3.46657 12.8742 3.80289 13.2105 4.47554 13.8832L7.60603 17.0137C8.27867 17.6863 8.61499 18.0226 8.95577 18.065C9.20903 18.0966 9.46475 18.03 9.67057 17.8791C9.94751 17.6761 10.0774 17.2185 10.3371 16.3034C10.5046 15.7133 10.5883 15.4182 10.7461 15.1709C10.8657 14.9833 11.0159 14.817 11.1903 14.6788C11.4202 14.4967 11.7052 14.3832 12.2751 14.1564L12.4206 14.0985C14.4311 13.2983 15.4364 12.8982 15.7638 12.1362C15.8707 11.8873 15.926 11.6192 15.9262 11.3483C15.9269 10.5189 15.1618 9.7539 13.6318 8.22382Z" fill="currentColor" />
                   <path d="M3.34679 18.142L6.04053 15.4482" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                 </svg>
               </div>
-              <div class="flex flex-col gap-3 justify-between p-1 w-full">
+              <div class="flex flex-col gap-3 justify-between p-1 pb-8 w-full">
                 <div class="flex flex-col gap-1">
                   <div class="flex gap-2 items-center">{{pin.title}}</div>
                   <p class="text-[var(--text-color)]/80 text-sm font-light">{{ pin.subtitle }}</p>
                 </div>
-                <div class="text-[var(--caret-color)]text-sm flex items-center justify-end gap-1 font-thin">
+                <div class="w-fit absolute bottom-0 left-0 rounded-bl-md rounded-tr-md px-2 py-[3px] text-sm flex items-center justify-end gap-1 font-thin bg-[var(--sub-alt-color)]">
                   <p>{{pin.published | date:"Y M d"}}</p>
-                  <svg fill="currentColor" width="15px" height="15px" viewBox="0 0 25 25" xmlns="http://www.w3.org/2000/svg"><path d="M19,4H17V3a1,1,0,0,0-2,0V4H9V3A1,1,0,0,0,7,3V4H5A3,3,0,0,0,2,7V19a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V7A3,3,0,0,0,19,4Zm1,15a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V12H20Zm0-9H4V7A1,1,0,0,1,5,6H7V7A1,1,0,0,0,9,7V6h6V7a1,1,0,0,0,2,0V6h2a1,1,0,0,1,1,1Z" /></svg>
+                  <svg fill="currentColor" strok="1.5" width="18px" height="18px" viewBox="0 0 25 25" xmlns="http://www.w3.org/2000/svg"><path d="M19,4H17V3a1,1,0,0,0-2,0V4H9V3A1,1,0,0,0,7,3V4H5A3,3,0,0,0,2,7V19a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V7A3,3,0,0,0,19,4Zm1,15a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V12H20Zm0-9H4V7A1,1,0,0,1,5,6H7V7A1,1,0,0,0,9,7V6h6V7a1,1,0,0,0,2,0V6h2a1,1,0,0,1,1,1Z" /></svg>
                 </div>
               </div>
             </div>
@@ -182,8 +190,18 @@
           <div class="flex flex-col w-full">
             <div class="flex gap-2 items-center">
               <p class="post-title text-[var(--main-color)] group-hover:underline">{{post.title}}</p>
-              <span class="{% if post.is_published %} text-[var(--main-color)] border-[var(--main-color)]/40 {% else %} text-blue-500 border-blue-500 {% endif %} rounded-md border-[0.5px] px-2 py-[3px] text-xs">{% if post.is_published %} عمومی {% else %} خصوصی {% endif %}</span>
-              <span class="rounded-md border-[0.5px] px-2 py-[3px] text-xs text-[var(--colorful-error-color)] text-[var(--colorful-error-color)]">
+              <span class="{% if post.is_published %} text-[var(--main-color)] border-[var(--main-color)]/40 {% else %} text-blue-500 border-blue-500 {% endif %} rounded-md border-[0.5px] px-2 py-[3px] text-xs flex items-center gap-1">
+                {% if post.is_published %}
+                  <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5V6.75a4.5 4.5 0 119 0v3.75M3.75 21.75h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H3.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                  </svg>
+                {% else %}
+                  <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                  </svg>
+                {% endif %}
+              </span>
+              <span class="rounded-md border-[0.5px] px-2 py-[3px] text-xs text-gray-400 text-gray-400">
                 {% if not post.category %}
                   بدون موضوع
                 {% else %}

@@ -36,9 +36,13 @@ urlpatterns: List[Union[URLPattern, URLResolver]] = [
     path("", include(("blog.urls", "blog"), namespace="blog")),
     path("", cache_page(500)(include("blog.urls")), name="cached_home"),
     # Security endpoints
+
     path("security/", include("django.contrib.auth.urls")),
     # Sitemap endpoints
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
+         name='django.contrib.sitemaps.views.sitemap'),
     path('robots.txt', include('robots.urls')),
+    
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name="sitemap"),
 ]
 

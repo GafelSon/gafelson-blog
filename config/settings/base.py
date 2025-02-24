@@ -20,7 +20,6 @@ INSTALLED_APPS = [
     'robots',
     "compressor",
     "ckeditor",
-    # Removed duplicate entries for sites and sitemaps
     "rest_framework",
     "imagekit",
     "lazy_srcset",

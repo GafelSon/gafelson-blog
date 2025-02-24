@@ -23,7 +23,6 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.sitemaps",
     "rest_framework",
-    "robots",
     "imagekit",
     "lazy_srcset",
     "blog.apps.BlogConfig",

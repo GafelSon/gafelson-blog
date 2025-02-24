@@ -16,7 +16,7 @@ class PostCreateSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Post
-        fields = ['title', 'content', 'category', 'slug', 'author', 'duplicate_count', 'target_date']
+        fields = ['title', 'content', "subtitle", 'category', "status", 'slug', 'author', 'duplicate_count', 'target_date']
         
     def validate_duplicate_count(self, value):
         if value < 1 or value > 50:

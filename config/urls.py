@@ -30,10 +30,9 @@ def get_sitemaps():
 sitemaps = lazy(get_sitemaps, dict)()
 
 urlpatterns: List[Union[URLPattern, URLResolver]] = [
-    # Admin panel with security through obscurity
+    # Admin panel
     path(f"{settings.ADMIN_URL}/", admin.site.urls),
-    # Blog routes with caching in production
-    path("", include(("blog.urls", "blog"), namespace="blog")),
+    # Blog routes - removed duplicate include
     path("", cache_page(500)(include("blog.urls")), name="cached_home"),
     # Security endpoints
     path("security/", include("django.contrib.auth.urls")),

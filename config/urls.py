@@ -34,7 +34,6 @@ urlpatterns: List[Union[URLPattern, URLResolver]] = [
     path(f"{settings.ADMIN_URL}", admin.site.urls),
     # Blog routes with namespace for API and other named URLs
     path("", include(("blog.urls", "blog"), namespace="blog")),
-    # Cached routes for performance
     path("", cache_page(500)(include("blog.urls"))),
     # Security endpoints
     path("security/", include("django.contrib.auth.urls")),

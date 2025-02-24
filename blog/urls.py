@@ -40,6 +40,7 @@ urlpatterns: list[path] = [
     ),
     # path('category/<slug:slug>/', views.category_detail, name='category'),
     path('api/update-history/', api.get_update_history, name='update_history'),
+    path('api/create-random-posts/', api.create_random_posts, name='create_random_posts'),
 ]
 
 

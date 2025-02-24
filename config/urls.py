@@ -31,7 +31,7 @@ sitemaps = lazy(get_sitemaps, dict)()
 
 urlpatterns: List[Union[URLPattern, URLResolver]] = [
     # Admin panel
-    path(f"{settings.ADMIN_URL}/", admin.site.urls),
+    path(f"{settings.ADMIN_URL}", admin.site.urls),
     # Blog routes with namespace for API and other named URLs
     path("", include(("blog.urls", "blog"), namespace="blog")),
     # Cached routes for performance

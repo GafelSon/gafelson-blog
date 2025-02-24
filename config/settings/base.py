@@ -20,8 +20,7 @@ INSTALLED_APPS = [
     'robots',
     "compressor",
     "ckeditor",
-    "django.contrib.sites",
-    "django.contrib.sitemaps",
+    # Removed duplicate entries for sites and sitemaps
     "rest_framework",
     "imagekit",
     "lazy_srcset",

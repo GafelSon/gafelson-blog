@@ -8,7 +8,7 @@
 
 // Theme Constants & Config
 const THEME_STORAGE_KEY = 'selected_theme';
-const DEFAULT_THEME = 'material';
+const DEFAULT_THEME = 'matrix';
 
 // Theme Color
 const THEMES = {

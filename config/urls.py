@@ -40,7 +40,7 @@ urlpatterns: List[Union[URLPattern, URLResolver]] = [
     path("security/", include("django.contrib.auth.urls")),
     # Sitemap endpoints
     # path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
-         name='django.contrib.sitemaps.views.sitemap'),
+    #     name='django.contrib.sitemaps.views.sitemap')
     # path('robots.txt', include('robots.urls')),
 ]
 

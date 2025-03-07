@@ -11,6 +11,7 @@ import './commands/_btt.js'
 import { loading } from "./commands/_loading.js"
 import { initThemeManager } from "./commands/_theme.js"
 import { initUpdateManager } from "./commands/_update.js"
+import { initProgressManager } from "./commands/_progress.js"
 
 
 const managers = new Map();
@@ -33,16 +34,39 @@ function cleanupManagers() {
         }
         managers.delete('update');
     }
+
+    if (managers.has('progress') && managers.get('progress')?.cleanup) {
+        try {
+            managers.get('progress').cleanup();
+        } catch (e) {
+            console.error('Error cleaning up progress manager:', e);
+        }
+        managers.delete('progress');
+    }
 }
 
 function initializeManagers() {
     cleanupManagers();
     const theme = initThemeManager();
     const update = initUpdateManager();
+    const progress = initProgressManager();
     
     if (theme) managers.set('theme', theme);
     if (update) managers.set('update', update);
+    if (progress) managers.set('progress', progress);
 }
+
+document.addEventListener('htmx:beforeRequest', () => {
+    if (managers.has('progress')) {
+        managers.get('progress').start();
+    }
+});
+
+document.addEventListener('htmx:afterRequest', () => {
+    if (managers.has('progress')) {
+        managers.get('progress').complete();
+    }
+});
 
 document.addEventListener('htmx:beforeSwap', () => {
     try {
